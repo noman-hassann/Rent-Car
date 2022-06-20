@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:rent_house/config/color.dart';
+import 'package:rent_house/screens/Liked/model/LikeModelClass.dart';
+import 'package:rent_house/screens/Liked/view/likeView.dart';
 import 'package:rent_house/screens/drawer/drawerData.dart';
-import 'package:rent_house/screens/Result/model/resultModelClass.dart';
-import 'package:rent_house/screens/Result/view/resultView.dart';
 import 'package:rent_house/widgets/widgets.dart';
 
-class result extends StatefulWidget {
-  const result({super.key});
+class LikedView extends StatefulWidget {
+  const LikedView({super.key});
   @override
-  State<result> createState() => _resultState();
+  State<LikedView> createState() => _LikedViewState();
 }
 
-class _resultState extends State<result> {
-  List<HotelSearchResult> listItem = [];
+class _LikedViewState extends State<LikedView> {
+  List<LikedViewClass> listItem = [];
   String _singleValue = "";
 
   void initState() {
@@ -150,7 +150,7 @@ class _resultState extends State<result> {
                       maxCrossAxisExtent: 400,
                     ),
                     itemBuilder: (BuildContext context, int index) =>
-                        (ResultView(indexPass: listItem[index])),
+                        (LikeView(indexPass: listItem[index])),
                   ),
                 ),
               )
@@ -159,51 +159,51 @@ class _resultState extends State<result> {
         )));
   }
 
-  List<HotelSearchResult> _searchResult() {
-    List<HotelSearchResult> newProduct = <HotelSearchResult>[];
-    newProduct.add(HotelSearchResult(
+  List<LikedViewClass> _searchResult() {
+    List<LikedViewClass> newProduct = <LikedViewClass>[];
+    newProduct.add(LikedViewClass(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelSearchResult(
+    newProduct.add(LikedViewClass(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-        newProduct.add(HotelSearchResult(
+        newProduct.add(LikedViewClass(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelSearchResult(
+    newProduct.add(LikedViewClass(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-        newProduct.add(HotelSearchResult(
+        newProduct.add(LikedViewClass(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelSearchResult(
+    newProduct.add(LikedViewClass(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-        newProduct.add(HotelSearchResult(
+        newProduct.add(LikedViewClass(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelSearchResult(
+    newProduct.add(LikedViewClass(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
