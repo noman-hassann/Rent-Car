@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:rent_house/config/color.dart';
+import 'package:rent_house/screens/Explore/model/ExploreModelClass.dart';
+import 'package:rent_house/screens/Explore/view/ExploreView.dart';
 import 'package:rent_house/screens/drawer/drawerData.dart';
-import 'package:rent_house/screens/Result/model/resultModelClass.dart';
-import 'package:rent_house/screens/Result/view/resultView.dart';
 import 'package:rent_house/widgets/widgets.dart';
 
-class result extends StatefulWidget {
-  const result({super.key});
+class Explore extends StatefulWidget {
+   Explore({super.key});
   @override
-  State<result> createState() => _resultState();
+  State<Explore> createState() => _ExploreState();
 }
 
-class _resultState extends State<result> {
-  List<HotelSearchResult> listItem = [];
+class _ExploreState extends State<Explore> {
+  List<ExploreModel> listItem = [];
   String _singleValue = "";
 
   void initState() {
@@ -28,7 +28,8 @@ class _resultState extends State<result> {
     return Scaffold(
         key: _scaffoldkey,
         drawer: Container(
-            width: size.width * 0.6, child: const Drawer(child: DrawerData())),
+            width: size.width * 0.6,
+             child: const Drawer(child: DrawerData())),
         body: SafeArea(
             child: Center(
           child: Container(
@@ -150,7 +151,7 @@ class _resultState extends State<result> {
                       maxCrossAxisExtent: 400,
                     ),
                     itemBuilder: (BuildContext context, int index) =>
-                        (ResultView(indexPass: listItem[index])),
+                        (ExploreView(indexPass: listItem[index])),
                   ),
                 ),
               )
@@ -159,51 +160,51 @@ class _resultState extends State<result> {
         )));
   }
 
-  List<HotelSearchResult> _searchResult() {
-    List<HotelSearchResult> newProduct = <HotelSearchResult>[];
-    newProduct.add(HotelSearchResult(
+  List<ExploreModel> _searchResult() {
+    List<ExploreModel> newProduct = <ExploreModel>[];
+    newProduct.add(ExploreModel(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelSearchResult(
+    newProduct.add(ExploreModel(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-        newProduct.add(HotelSearchResult(
+        newProduct.add(ExploreModel(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelSearchResult(
+    newProduct.add(ExploreModel(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-        newProduct.add(HotelSearchResult(
+        newProduct.add(ExploreModel(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelSearchResult(
+    newProduct.add(ExploreModel(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-        newProduct.add(HotelSearchResult(
+        newProduct.add(ExploreModel(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelSearchResult(
+    newProduct.add(ExploreModel(
       image1: "room.png",
       image2: "bedroom.png",
       image3: "apartment1.png",

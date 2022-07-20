@@ -5,7 +5,7 @@ Container rowButtonFun(
     {backgroundcolor, textColor, title1, width, height, ontap}) {
   return Container(
     decoration:
-        BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
+        BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20))),
     child: TextButton(
       onPressed: () {
         ontap();
@@ -15,8 +15,8 @@ Container rowButtonFun(
           primary: textColor,
           minimumSize: Size(width, height),
           textStyle:
-              const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500)),
-      child: text(title: title1, fontsize: 20.0, fontweight: FontWeight.normal),
+              const TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500)),
+      child: text(title: title1, fontsize: 15.0, fontweight: FontWeight.normal),
     ),
   );
 }

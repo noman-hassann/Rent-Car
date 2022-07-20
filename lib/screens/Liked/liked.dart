@@ -5,13 +5,13 @@ import 'package:rent_house/screens/Liked/view/likeView.dart';
 import 'package:rent_house/screens/drawer/drawerData.dart';
 import 'package:rent_house/widgets/widgets.dart';
 
-class LikedView extends StatefulWidget {
-  const LikedView({super.key});
+class Liked extends StatefulWidget {
+   Liked({super.key});
   @override
-  State<LikedView> createState() => _LikedViewState();
+  State<Liked> createState() => _LikedState();
 }
 
-class _LikedViewState extends State<LikedView> {
+class _LikedState extends State<Liked> {
   List<LikedViewClass> listItem = [];
   String _singleValue = "";
 
@@ -20,15 +20,11 @@ class _LikedViewState extends State<LikedView> {
     super.initState();
   }
 
-  GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        key: _scaffoldkey,
-        drawer: Container(
-            width: size.width * 0.6, child: const Drawer(child: DrawerData())),
         body: SafeArea(
             child: Center(
           child: Container(
@@ -52,18 +48,18 @@ class _LikedViewState extends State<LikedView> {
                       backgroundColor: Color.fromARGB(255, 255, 255, 255),
                       child: IconButton(
                         icon: const Icon(
-                          Icons.menu,
+                          Icons.arrow_back,
                           size: 25,
                           color: orange,
                         ),
                         onPressed: () {
-                          _scaffoldkey.currentState!.openDrawer();
+                         
                         },
                       ),
                     ),
                   ),
                   text(
-                      title: "",
+                      title: "Your Liked Hotels",
                       fontsize: 20.0,
                       fontweight: FontWeight.normal,
                       color: const Color.fromARGB(255, 15, 5, 5)),
@@ -72,67 +68,67 @@ class _LikedViewState extends State<LikedView> {
               ),
               SizedBox(height: size.height * 0.042),
              
-              Container(
-                width: size.width * 0.87,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          Color.fromARGB(255, 199, 197, 197).withOpacity(0.3),
-                      offset: Offset(5.0, 10.0),
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(.8),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20.0),
-                    ),
-                  ),
-                  child: TextField(
-                    style: const TextStyle(fontSize: 17.0, color: textwhite),
-                    decoration: InputDecoration(
-                      //  fillColor: Colors.amber,
-                      border: InputBorder.none,
-                      contentPadding:
-                          const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: textwhite,
-                      ),
-                      hintText: "Search Here",
-                      disabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 101, 100, 100),
-                              width: 40.0),
-                          borderRadius: BorderRadius.circular(25.0)),
-                      // focusedBorder: OutlineInputBorder(
-                      //     borderSide:
-                      //         const BorderSide(color: Color.fromARGB(255, 157, 155, 155), width: 32.0),
-                      //     borderRadius: BorderRadius.circular(25.0)
-                      //     ),
-                      // suffixIcon: GestureDetector(
-                      //   onTap: (() {
-                      //     showDialog(
-                      //       context: context,
-                      //       builder: (_) => const PopUpOverLay(),
-                      //     );
-                      //   }),
-                      //   child: const Icon(
-                      //     Icons.sort,
-                      //     color: textwhite,
-                      //   ),
-                      // ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: size.height * 0.02,
-              ),
+              // Container(
+              //   width: size.width * 0.87,
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.all(Radius.circular(30)),
+              //     boxShadow: [
+              //       BoxShadow(
+              //         color:
+              //             Color.fromARGB(255, 199, 197, 197).withOpacity(0.3),
+              //         offset: Offset(5.0, 10.0),
+              //         blurRadius: 5.0,
+              //       ),
+              //     ],
+              //   ),
+              //   child: Container(
+              //     decoration: BoxDecoration(
+              //       color: Colors.white.withOpacity(.8),
+              //       borderRadius: const BorderRadius.all(
+              //         Radius.circular(20.0),
+              //       ),
+              //     ),
+              //     child: TextField(
+              //       style: const TextStyle(fontSize: 17.0, color: textwhite),
+              //       decoration: InputDecoration(
+              //         //  fillColor: Colors.amber,
+              //         border: InputBorder.none,
+              //         contentPadding:
+              //             const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              //         prefixIcon: const Icon(
+              //           Icons.search,
+              //           color: textwhite,
+              //         ),
+              //         hintText: "Search Here",
+              //         disabledBorder: OutlineInputBorder(
+              //             borderSide: const BorderSide(
+              //                 color: Color.fromARGB(255, 101, 100, 100),
+              //                 width: 40.0),
+              //             borderRadius: BorderRadius.circular(25.0)),
+              //         // focusedBorder: OutlineInputBorder(
+              //         //     borderSide:
+              //         //         const BorderSide(color: Color.fromARGB(255, 157, 155, 155), width: 32.0),
+              //         //     borderRadius: BorderRadius.circular(25.0)
+              //         //     ),
+              //         // suffixIcon: GestureDetector(
+              //         //   onTap: (() {
+              //         //     showDialog(
+              //         //       context: context,
+              //         //       builder: (_) => const PopUpOverLay(),
+              //         //     );
+              //         //   }),
+              //         //   child: const Icon(
+              //         //     Icons.sort,
+              //         //     color: textwhite,
+              //         //   ),
+              //         // ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: size.height * 0.02,
+              // ),
           
               Expanded(
                 child: SingleChildScrollView(

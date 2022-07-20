@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rent_house/Screens/Home/widgets/PopUpOverLay.dart';
 import 'package:rent_house/config/color.dart';
-import 'package:rent_house/screens/Home/widgets/PopUpOverLay.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
 
 Container txtField({text, context, ontap, icon,hintText}) {

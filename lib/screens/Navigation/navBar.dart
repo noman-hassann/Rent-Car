@@ -1,81 +1,91 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 import 'package:rent_house/config/color.dart';
+import 'package:rent_house/screens/Explore/Explore.dart';
 import 'package:rent_house/screens/Home/home.dart';
-import 'package:rent_house/screens/Result/result.dart';
+import 'package:rent_house/screens/Liked/liked.dart';
+import 'package:rent_house/screens/Setting/setting.dart';
 
-
-
-class NavBar extends StatefulWidget {
-  const NavBar({Key? key, this.title}) : super(key: key);
-
-  final String? title;
+class Navbar extends StatefulWidget {
+  const Navbar({super.key});
 
   @override
-  _NavBarState createState() => _NavBarState();
+  State<Navbar> createState() => _NavbarState();
 }
 
-class _NavBarState extends State<NavBar> with TickerProviderStateMixin {
-  TabController? _tabController;
+class _NavbarState extends State<Navbar> {
+  int _selectedIndex = 0;
+  late PageController _pageController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(
-      initialIndex: 1,
-      length: 4,
-      vsync: this,
-    );
+    _pageController = PageController();
   }
 
   @override
   void dispose() {
+    _pageController.dispose();
     super.dispose();
-    _tabController!.dispose();
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: MotionTabBar(
-        initialSelectedTab: "Home",
-        useSafeArea: true, // default: true, apply safe area wrapper
-        labels: const ["Home", "Explore", "Favourite", "Profile"],
-        icons: const [Icons.home, Icons.search, CupertinoIcons.heart, Icons.person],
-
-        // optional badges, length must be same with labels
-         tabSize: 50,
-        tabBarHeight: 55,
-        textStyle: const TextStyle(
-          fontSize: 12,
-          color:textblack,
-          fontWeight: FontWeight.w500,
+      body: SizedBox.expand(
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+           _selectedIndex = index;
+          },
+          children: <Widget>[
+            Home(),
+            Explore(),
+            Liked(),
+            Setting(),
+          ],
         ),
-        tabIconColor: textwhite,
-        tabIconSize: 28.0,
-        tabIconSelectedSize: 26.0,
-        tabSelectedColor: orange,
-        tabIconSelectedColor: Colors.white,
-        tabBarColor: Colors.white,
-        onTabItemSelected: (int value) {
-          setState(() {
-            _tabController!.index = value;
-          });
-        },
       ),
-      body: TabBarView(
-        physics: NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
-        controller: _tabController,
-        // ignore: prefer_const_literals_to_create_immutables
-        children: <Widget>[
-          Home(),
-          result(),
-          Home(),
-          Home(),
-        
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        selectedItemColor: orange,
+        unselectedItemColor: textwhite,
+        elevation: 10,
+        iconSize: 30,
+        onTap: _onItemTapped,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              label: "Home",
+              icon: Icon(
+                Icons.home,
+              )),
+          BottomNavigationBarItem(
+            label: "Explore",
+            icon: Icon(Icons.search),
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            label: "Favourite",
+            icon: Icon(CupertinoIcons.heart),
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            label: "Profile",
+            icon: Icon(Icons.person),
+            backgroundColor: Colors.white,
+          ),
         ],
       ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    _selectedIndex = index;
+    //
+    //
+    //using this page controller you can make beautiful animation effects
+    _pageController.animateToPage(index,
+        duration: Duration(milliseconds: 200), curve: Curves.easeIn);
   }
 }

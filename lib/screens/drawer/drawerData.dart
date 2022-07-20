@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rent_house/config/color.dart';
+import 'package:rent_house/screens/Setting/setting.dart';
 import 'package:rent_house/widgets/textIconFunRow.dart';
 import 'package:rent_house/widgets/widgets.dart';
 
@@ -67,11 +68,20 @@ class _DrawerDataState extends State<DrawerData> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconTextFun(
-                          title: "Account Setting",
-                          icon: Icons.person,
-                          fontColor: textblack,
-                          iconColor: orange),
+                      InkWell(
+                        onTap: (){
+                             Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>  Setting()),
+                        );
+                        },
+                        child: IconTextFun(
+                            title: "Account Setting",
+                            icon: Icons.person,
+                            fontColor: textblack,
+                            iconColor: orange),
+                      ),
                     const  SizedBox(
                         height: 30,
                       ),

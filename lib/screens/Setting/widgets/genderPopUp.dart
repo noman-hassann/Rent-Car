@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:rent_house/Screens/Home/widgets/seachBox.dart';
-import 'package:rent_house/config/color.dart';
-import 'package:rent_house/widgets/rowButton.dart';
 import 'package:rent_house/widgets/widgets.dart';
 
-class PopUpOverLay extends StatefulWidget {
-  const PopUpOverLay({Key? key}) : super(key: key);
+class GenderPopUP extends StatefulWidget {
+  const GenderPopUP({Key? key}) : super(key: key);
   @override
-  State<StatefulWidget> createState() => PopUpOverLayState();
+  State<StatefulWidget> createState() => GenderPopUPState();
 }
 
-class PopUpOverLayState extends State<PopUpOverLay>
+class GenderPopUPState extends State<GenderPopUP>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> scaleAnimation;
@@ -22,6 +20,7 @@ class PopUpOverLayState extends State<PopUpOverLay>
     controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 450));
     scaleAnimation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
+
     controller.addListener(() {
       setState(() {});
     });
@@ -59,43 +58,18 @@ class PopUpOverLayState extends State<PopUpOverLay>
                           title: "Filter",
                           fontsize: 20.0,
                           fontweight: FontWeight.normal),
-                      InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(Icons.cancel_outlined)),
+                      InkWell(onTap: () {
+                      Navigator.pop(context);
+                      },
+                       child: Icon(Icons.cancel_outlined)),
                     ],
                   ),
                 ),
-                txtField(
-                    text: "Location",
-                    icon: Icons.sort,
-                    ontap: () {},
-                    hintText: "Locathion"),
+                txtField(text: "Location", icon: Icons.sort, ontap: () {},hintText:"Locathion"),
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-                txtField(
-                    text: "Type",
-                    icon: Icons.sort,
-                    ontap: () {},
-                    hintText: "Type"),
-                       SizedBox(
-                  height: size.height * 0.02,
-                ),
-                 rowButtonFun(
-                        backgroundcolor: orange,
-                        title1: "Apply",
-                        height: size.height * 0.04,
-                        width: size.width * 0.43,
-                        textColor: Color.fromARGB(255, 255, 255, 255),
-                        ontap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => const login()),
-                          // );
-                        }),
+                txtField(text: "Type", icon: Icons.sort, ontap: () {},hintText:"Type"),
               ],
             ),
           ),

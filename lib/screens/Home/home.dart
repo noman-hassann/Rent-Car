@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:group_radio_button/group_radio_button.dart';
-import 'package:rent_house/Screens/Model/homeData.dart';
-import 'package:rent_house/Screens/View/homeView.dart';
+import 'package:rent_house/Screens/Drawer/drawerData.dart';
+import 'package:rent_house/Screens/Home/view/homeView.dart';
+import 'package:rent_house/Screens/Home/widgets/PopUpOverLay.dart';
 import 'package:rent_house/config/color.dart';
-import 'package:rent_house/screens/Home/widgets/PopUpOverLay.dart';
-import 'package:rent_house/screens/drawer/drawerData.dart';
+import 'package:rent_house/screens/Home/model/HomeModelClass.dart';
 import 'package:rent_house/widgets/rowButton.dart';
 import 'package:rent_house/widgets/widgets.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  Home({super.key});
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  List<HotelRoom> listItem = [];
+  List<HomeRoom> listItem = [];
   String _singleValue = "";
-
+  bool pressAttention = true;
   void initState() {
     listItem = _hotelRoom();
     super.initState();
@@ -28,6 +28,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
           key: _scaffoldkey,
@@ -93,40 +94,82 @@ class _HomeState extends State<Home> {
                   height: size.height * 0.055,
                   width: size.width * 0.86,
                   child: Row(children: [
-                    rowButtonFun(
-                        backgroundcolor: Colors.white,
-                        title1: "For Sale",
-                        textColor: Colors.black,
-                        height: size.height * 0.07,
-                        width: size.width * 0.43,
-                        ontap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => const loginScreen()),
-                          // );
-                        }),
-                    rowButtonFun(
-                        backgroundcolor: orange,
-                        title1: "For Rent",
-                        height: size.height * 0.07,
-                        width: size.width * 0.43,
-                        textColor: Color.fromARGB(255, 255, 255, 255),
-                        ontap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => const login()),
-                          // );
-                        }),
+                    ///Custom Button
+                    Container(
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: TextButton(
+                        onPressed: () {
+                          print("button");
+                          setState(() => pressAttention = false);
+                          print(pressAttention);
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor:
+                                pressAttention == false ? orange : Colors.white,
+                            //    backgroundColor: Colors.white,
+                            // primary: Colors.white,
+                            minimumSize:
+                                Size(size.width * 0.43, size.height * 0.07),
+                            textStyle: const TextStyle(
+                                fontSize: 17.0, fontWeight: FontWeight.w500)),
+                        child: text(
+                            title: " For Sale",
+                            fontsize: 15.0,
+                            color: pressAttention == false
+                                ? Colors.white
+                                : Colors.black,
+                            fontweight: FontWeight.normal),
+                      ),
+                    ),
+
+                    Container(
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() => pressAttention = true);
+                          print(pressAttention);
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor:
+                                pressAttention == true ? orange : Colors.white,
+                            //    backgroundColor: Colors.white,
+                            primary: Colors.black,
+                            minimumSize:
+                                Size(size.width * 0.43, size.height * 0.07),
+                            textStyle: const TextStyle(
+                                fontSize: 17.0, fontWeight: FontWeight.w500)),
+                        child: text(
+                            title: "For Rent",
+                            fontsize: 15.0,
+                            color: pressAttention == true
+                                ? Colors.white
+                                : Colors.black,
+                            fontweight: FontWeight.normal),
+                      ),
+                    ),
+
+                    // rowButtonFun(
+                    //     backgroundcolor: Colors.white,
+                    //     title1: "For Sale",
+                    //     textColor: Colors.black,
+                    //     height: size.height * 0.07,
+                    //     width: size.width * 0.43,
+                    //     ontap: () {
+                    //       // Navigator.push(
+                    //       //   context,
+                    //       //   MaterialPageRoute(
+                    //       //       builder: (context) => const loginScreen()),
+                    //       // );
+                    //     }),
                   ]),
                 ),
-                                SizedBox(height: size.height * 0.020),
-
+                SizedBox(height: size.height * 0.020),
                 Container(
                   width: size.width * 0.87,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    borderRadius: const BorderRadius.all(Radius.circular(30)),
                     boxShadow: [
                       BoxShadow(
                         color:
@@ -176,16 +219,15 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                                               SizedBox(height: size.height * 0.010),
-
+                SizedBox(height: size.height * 0.010),
                 Center(
                   child: SizedBox(
-                   // color: Colors.amber,
+                    // color: Colors.amber,
                     width: size.width * 0.85,
                     child: Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: text(title: "Sort :", fontsize: 17.0),
                         ),
                         RadioButton(
@@ -226,7 +268,7 @@ class _HomeState extends State<Home> {
                         maxCrossAxisExtent: 200,
                       ),
                       itemBuilder: (BuildContext context, int index) =>
-                          (HotelRoomView(indexPass: listItem[index])),
+                          (HomeRoomView(indexPass: listItem[index])),
                     ),
                   ),
                 )
@@ -236,39 +278,39 @@ class _HomeState extends State<Home> {
     );
   }
 
-  List<HotelRoom> _hotelRoom() {
-    List<HotelRoom> newProduct = <HotelRoom>[];
-    newProduct.add(HotelRoom(
+  List<HomeRoom> _hotelRoom() {
+    List<HomeRoom> newProduct = <HomeRoom>[];
+    newProduct.add(HomeRoom(
       image1: "apartment1.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelRoom(
+    newProduct.add(HomeRoom(
       image1: "apartment1.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelRoom(
+    newProduct.add(HomeRoom(
       image1: "apartment1.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelRoom(
+    newProduct.add(HomeRoom(
       image1: "apartment1.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelRoom(
+    newProduct.add(HomeRoom(
       image1: "apartment1.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
       image4: "bedroom.png",
     ));
-    newProduct.add(HotelRoom(
+    newProduct.add(HomeRoom(
       image1: "apartment1.png",
       image2: "bedroom.png",
       image3: "apartment1.png",
