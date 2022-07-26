@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rent_house/screens/Admin/Add_New_Property/listProperty.dart';
+import 'package:rent_house/screens/Admin/View_Property/AdminViwe.dart';
+import 'package:rent_house/screens/Admin/View_Property/viewTest.dart';
 import 'package:rent_house/screens/Admin/Widgets/dropDownRadio.dart';
 import 'package:rent_house/screens/Explore/Explore.dart';
 import 'package:rent_house/screens/Home/details/details.dart';
@@ -12,12 +14,15 @@ import 'package:rent_house/screens/Setting/setting.dart';
 import 'package:rent_house/test2.dart';
 import 'package:rent_house/testScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+
 
 import 'screens/LoginSignUp/View/login.dart';
 
 // @dart=2.9
 var token;
 Future<void> main() async {
+
   runApp(const MyApp());
   SharedPreferences pref = await SharedPreferences.getInstance();
   token = pref.getString('token');
@@ -42,8 +47,11 @@ class MyApp extends StatelessWidget {
           GetPage(name: "/signup", page: () => const SignupScreen()),
           GetPage(name: "/Navbar", page: () => const Navbar()),
           GetPage(name: "/login", page: () => LoginScreen()),
+          GetPage(name: "/listProperty", page: () => ListProperty()),
+          GetPage(name: "/AdminProperty", page: () => AdminProperty()),
+          GetPage(name: "/HotelView", page: () => HotelView()),
         ],
-        // initialRoute: "/Navbar",
-        home: (token == null) ? ListProperty() : Navbar());
+        initialRoute: "/AdminProperty");
+      //  home: (token == null) ? ListProperty() : Navbar());
   }
 }

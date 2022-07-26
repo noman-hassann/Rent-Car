@@ -82,25 +82,25 @@ class _SettingState extends State<Setting> {
               //personal Information
               SizedBox(height: size.height * 0.032),
 
-              textWidget(
+              const textWidget(
                 text1: "Name",
                 text2: "Sophie Garnier",
               ),
               SizedBox(height: size.height * 0.032),
-              textWidget(
+            const  textWidget(
                 text1: "Address",
                 text2: "House 234 Near New Market Daka",
               ),
 
               SizedBox(height: size.height * 0.032),
 
-              textWidget(
+             const textWidget(
 
                 text1: "Contact",
                 text2: "+1 234 234 2345",
               ),
               SizedBox(height: size.height * 0.032),
-              textWidget(
+            const  textWidget(
                 text1: "Gender",
                 text2: "Male",
               ),

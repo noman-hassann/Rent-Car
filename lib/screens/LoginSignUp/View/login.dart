@@ -4,8 +4,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:rent_house/Conrtoller/loginSignupApis/loginApis.dart';
 import 'package:rent_house/config/color.dart';
-import 'package:rent_house/Apis/loginSignupApis/loginApis.dart';
 import 'package:validators/validators.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -149,7 +149,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       if (validData() == true) {
                                         loginApis(
                                                 email: myControllerEmail.text,
-                                                password: myControllerPassword.text,
+                                                password:
+                                                    myControllerPassword.text,
                                                 context: context)
                                             .then((value) => {
                                                   setState(() {

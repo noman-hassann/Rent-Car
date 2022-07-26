@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
+import 'package:rent_house/Conrtoller/loginSignupApis/SignupApis.dart';
 import 'package:rent_house/config/color.dart';
-import 'package:rent_house/Apis/loginSignupApis/SignupApis.dart';
 import 'package:rent_house/widgets/widgets.dart';
 import 'package:validators/validators.dart';
 
