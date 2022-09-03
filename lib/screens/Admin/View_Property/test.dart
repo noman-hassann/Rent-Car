@@ -1,136 +1,155 @@
-// import 'dart:convert';
-// import 'dart:io';
+// add http plugin
 
-// import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
-// import 'package:rent_house/Model/room.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:rent_house/widgets/widgets.dart';
 
-// class MyHttpOverrides extends HttpOverrides {
-//   @override
-//   HttpClient createHttpClient(SecurityContext? context) {
-//     return super.createHttpClient(context)
-//       ..badCertificateCallback =
-//           (X509Certificate cert, String host, int port) => true;
-//   }
-// }
+class Test extends StatelessWidget {
+  const Test({Key? key}) : super(key: key);
 
-// class MyApp extends StatelessWidget {
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//         title: 'Flutter Demo',
-//         theme: ThemeData(
-//           primarySwatch: Colors.blue,
-//         ),
-//         debugShowCheckedModeBanner: false,
-//         home: HomePage());
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Home(),
+    );
+  }
+}
 
-// class HomePage extends StatefulWidget {
-//   @override
-//   _HomePageState createState() => _HomePageState();
-// }
+String? stringResponse;
+Map? mapResponse;
+Map? dataResponce;
 
-// class _HomePageState extends State<HomePage> {
-//   int currentPage = 1;
-//   List<HotelRoom> _appartment = [];
-//   late int totalPages;
-//   HotelRoom? hotelData;
-//   Data data=Data();
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
-//   final RefreshController refreshController =
-//       RefreshController(initialRefresh: true);
+  @override
+  State<Home> createState() => _HomeState();
+}
 
-//   Future<bool> getPassengerData({bool isRefresh = false}) async {
-//     if (isRefresh) {
-//       currentPage = 1;
-//     } else {
-//       if (currentPage >= totalPages) {
-//         refreshController.loadNoData();
-//         return false;
-//       }
-//     }
-//     var token = 'Bearer 68|V2gnBMtaOjS2exRW2LhNKh7djOg3RxURT0OL2yL5';
+class _HomeState extends State<Home> {
+  bool _loading = false;
+  List? _users;
 
-//     final Uri uri = Uri.parse(
-//       "https://denga.r3therapeutic.com/public/api/getpost",
-//     );
-//     final response = await http.post(uri, headers: {
-//       'Content-Type': 'application/json',
-//       'Accept': 'application/json',
-//       'Authorization': 'Bearer $token',
-//     });
-//     // HotelRoom hotelData;
-//     var decoded = jsonDecode(response.body);
-//     List mydata = decoded['data'];
-//     if (response.statusCode == 200) {
-//       hotelData = HotelRoom.fromJson(decoded);
+  @override
+  void initState() {
+    // TODO: implement initState
+    apiCall();
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+        appBar: AppBar(
+          title: const FittedBox(
+            child: Text(
+              "API Call",
+            ),
+          ),
+        ),
+        body: Center(
+            child: Container(
+                color: Colors.amber,
+                width: size.width * 0.5,
+                height: size.height * 0.2,
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return Container(
+                      child: Row(
+                        children: [
+                          text(title: _users![index]['address'].toString())
+                        ],
+                      ),
+                    );
+                  },
+                  itemCount: _users == null ? 0 : _users!.length,
+                ))
+            // ? ListView.builder(
+            //     itemCount: _users.length,
+            //     itemBuilder: ((context, index) {
+            //       return Card(
+            //         margin: const EdgeInsets.symmetric(
+            //           horizontal: 15.0,
+            //           vertical: 10.0,
+            //         ),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(8.0),
+            //           child: Row(
+            //             children: [
+            //               Image.network(_users[index]['image']),
+            //               Column(
+            //                 mainAxisAlignment: MainAxisAlignment.start,
+            //                 crossAxisAlignment: CrossAxisAlignment.start,
+            //                 children: [
+            //                   Text(_users[index]['firstName']),
+            //                   Text(_users[index]['email']),
+            //                   Text(_users[index]['phone']),
+            //                 ],
+            //               )
+            //             ],
+            //           ),
+            //         ),
+            //       );
+            //     }),
+            //   )
 
+            // : Center(
+            //     child: _loading
+            //         ? CircularProgressIndicator()
+            //         : ElevatedButton(
+            //             child: const Text("fetch users"),
+            //             onPressed: apiCall,
+            //           ),
+            //   ),
 
-//       if (isRefresh) {
-//          _appartmet = result.data;
-//       } else {
-//          _appartmet.addAll(result.data);
-//       }
-//       currentPage++;
-//        totalPages = result.total;
-//       print(response.body);
-//       setState(() {});
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   }
+            ));
+  }
 
-  
-  
+  var token = 'Bearer 68|V2gnBMtaOjS2exRW2LhNKh7djOg3RxURT0OL2yL5';
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("Infinite List Pagination"),
-//       ),
-//       body: SmartRefresher(
-//         controller: refreshController,
-//         enablePullUp: true,
-//         onRefresh: () async {
-//           final result = await getPassengerData(isRefresh: true);
-//           if (result) {
-//             refreshController.refreshCompleted();
-//           } else {
-//             refreshController.refreshFailed();
-//           }
-//         },
-//         onLoading: () async {
-//           final result = await getPassengerData();
-//           if (result) {
-//             refreshController.loadComplete();
-//           } else {
-//             refreshController.loadFailed();
-//           }
-//         },
-//         child: ListView.separated(
-//           itemBuilder: (context, index) {
-//             final passenger = passengers[index];
+  Future apiCall() async {
+    http.Response response;
+    response = await http.post(
+        Uri.parse("https://denga.r3therapeutic.com/public/api/getpost"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    if (response.statusCode == 200) {
+      setState(() {
+        //  stringResponse = response.body;
+        mapResponse = jsonDecode(response.body);
+        _users = mapResponse?['data'];
+      });
+    }
+  }
 
-//             return ListTile(
-//               title: Text(passenger.name),
-//               subtitle: Text(passenger.airline.country),
-//               trailing: Text(passenger.airline.name,  style: TextStyle(color: Colors.green),),
-//             );
-//           },
-//           separatorBuilder: (context, index) => Divider(),
-//           itemCount: passengers.length,
-//         ),
-//       ),
-//     );
-//   }
-// }
+  // loadUserList() async {
+  //   setState(() {
+  //     _loading = true;
+  //   });
+  //   var token = 'Bearer 68|V2gnBMtaOjS2exRW2LhNKh7djOg3RxURT0OL2yL5';
+  //   var res = await http.post(
+  //       Uri.https(
+  //           "https://denga.r3therapeutic.com/public/api/getpost", "users"),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Accept': 'application/json',
+  //         'Authorization': 'Bearer $token',
+  //       });
+  //   if (res.statusCode == 200) {
+  //     var jsonData = jsonDecode(res.body);
+  //     if (jsonData['users'].isNotEmpty) {
+  //       setState(() {
+  //         _users = jsonData['users'];
+  //         _loading = false;
+  //       });
+  //     }
+  //   }
+  // }
 
-
+}

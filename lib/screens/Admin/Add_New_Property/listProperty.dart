@@ -27,6 +27,7 @@ bool isloading = false;
 GroupController controller = GroupController();
 
 final ImagePicker imagePicker = ImagePicker();
+List<File>? imageFileList = [];
 
 class _ListPropertyState extends State<ListProperty> {
   List<File>? imageFileList = [];
@@ -303,6 +304,7 @@ class _ListPropertyState extends State<ListProperty> {
                                 });
                               },
                             ),
+                         
                           ),
                         ),
                         //Wash rooms code here
@@ -476,6 +478,7 @@ class _ListPropertyState extends State<ListProperty> {
                             },
                           )),
                     ),
+                 
                   ],
                 ),
               ),

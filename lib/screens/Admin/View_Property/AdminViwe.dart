@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:rent_house/config/color.dart';
 import 'package:rent_house/screens/Admin/Add_New_Property/listProperty.dart';
@@ -5,6 +7,7 @@ import 'package:rent_house/screens/Explore/model/ExploreModelClass.dart';
 import 'package:rent_house/screens/Explore/view/ExploreView.dart';
 import 'package:rent_house/screens/drawer/drawerData.dart';
 import 'package:rent_house/widgets/widgets.dart';
+import 'package:http/http.dart' as http;
 
 class AdminProperty extends StatefulWidget {
   const AdminProperty({super.key});
@@ -13,15 +16,23 @@ class AdminProperty extends StatefulWidget {
 }
 
 class _AdminPropertyState extends State<AdminProperty> {
-  List<ExploreModel> listItem = [];
   String _singleValue = "";
 
+  String? stringResponse;
+  Map? mapResponse;
+  Map? dataResponce;
   void initState() {
-    listItem = _searchResult();
+   // listItem = _searchResult();
+    apiCall();
+
     super.initState();
   }
 
   GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+  bool _loading = false;
+  List? _users;
+  List? image;
+ // var image;
 
   @override
   Widget build(BuildContext context) {
@@ -112,12 +123,15 @@ class _AdminPropertyState extends State<AdminProperty> {
               ),
 
               Expanded(
-                child: SingleChildScrollView(
+               
+                child:_users==null?Container():
+                
+                 SingleChildScrollView(
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     primary: false,
-                    itemCount: listItem.length,
+                    itemCount: _users!.length,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                       mainAxisSpacing: 1.0,
@@ -127,67 +141,89 @@ class _AdminPropertyState extends State<AdminProperty> {
                       maxCrossAxisExtent: 400,
                     ),
                     itemBuilder: (BuildContext context, int index) =>
-                        (ExploreView(indexPass: listItem[index])),
+                        (ExploreView(indexPass: _users![index])),
                   ),
                 ),
               )
-           
             ]),
           ),
         )));
   }
 
-  List<ExploreModel> _searchResult() {
-    List<ExploreModel> newProduct = <ExploreModel>[];
-    newProduct.add(ExploreModel(
-      image1: "room.png",
-      image2: "bedroom.png",
-      image3: "apartment1.png",
-      image4: "bedroom.png",
-    ));
-    newProduct.add(ExploreModel(
-      image1: "room.png",
-      image2: "bedroom.png",
-      image3: "apartment1.png",
-      image4: "bedroom.png",
-    ));
-    newProduct.add(ExploreModel(
-      image1: "room.png",
-      image2: "bedroom.png",
-      image3: "apartment1.png",
-      image4: "bedroom.png",
-    ));
-    newProduct.add(ExploreModel(
-      image1: "room.png",
-      image2: "bedroom.png",
-      image3: "apartment1.png",
-      image4: "bedroom.png",
-    ));
-    newProduct.add(ExploreModel(
-      image1: "room.png",
-      image2: "bedroom.png",
-      image3: "apartment1.png",
-      image4: "bedroom.png",
-    ));
-    newProduct.add(ExploreModel(
-      image1: "room.png",
-      image2: "bedroom.png",
-      image3: "apartment1.png",
-      image4: "bedroom.png",
-    ));
-    newProduct.add(ExploreModel(
-      image1: "room.png",
-      image2: "bedroom.png",
-      image3: "apartment1.png",
-      image4: "bedroom.png",
-    ));
-    newProduct.add(ExploreModel(
-      image1: "room.png",
-      image2: "bedroom.png",
-      image3: "apartment1.png",
-      image4: "bedroom.png",
-    ));
+  // List<ExploreModel> _searchResult() {
+  //   List<ExploreModel> newProduct = <ExploreModel>[];
+  //   newProduct.add(ExploreModel(
+  //     image1: "room.png",
+  //     image2: "bedroom.png",
+  //     image3: "apartment1.png",
+  //     image4: "bedroom.png",
+  //   ));
+  //   newProduct.add(ExploreModel(
+  //     image1: "room.png",
+  //     image2: "bedroom.png",
+  //     image3: "apartment1.png",
+  //     image4: "bedroom.png",
+  //   ));
+  //   newProduct.add(ExploreModel(
+  //     image1: "room.png",
+  //     image2: "bedroom.png",
+  //     image3: "apartment1.png",
+  //     image4: "bedroom.png",
+  //   ));
+  //   newProduct.add(ExploreModel(
+  //     image1: "room.png",
+  //     image2: "bedroom.png",
+  //     image3: "apartment1.png",
+  //     image4: "bedroom.png",
+  //   ));
+  //   newProduct.add(ExploreModel(
+  //     image1: "room.png",
+  //     image2: "bedroom.png",
+  //     image3: "apartment1.png",
+  //     image4: "bedroom.png",
+  //   ));
+  //   newProduct.add(ExploreModel(
+  //     image1: "room.png",
+  //     image2: "bedroom.png",
+  //     image3: "apartment1.png",
+  //     image4: "bedroom.png",
+  //   ));
+  //   newProduct.add(ExploreModel(
+  //     image1: "room.png",
+  //     image2: "bedroom.png",
+  //     image3: "apartment1.png",
+  //     image4: "bedroom.png",
+  //   ));
+  //   newProduct.add(ExploreModel(
+  //     image1: "room.png",
+  //     image2: "bedroom.png",
+  //     image3: "apartment1.png",
+  //     image4: "bedroom.png",
+  //   ));
 
-    return newProduct;
+  //   return newProduct;
+  // }
+
+  var token = 'Bearer 68|V2gnBMtaOjS2exRW2LhNKh7djOg3RxURT0OL2yL5';
+
+  Future apiCall() async {
+    http.Response response;
+    response = await http.post(
+        Uri.parse("https://denga.r3therapeutic.com/public/api/getpost"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    if (response.statusCode == 200) {
+      setState(() {
+        //  stringResponse = response.body;
+        mapResponse = jsonDecode(response.body);
+        _users = mapResponse?['data'];
+     image= _users![0]['images'];
+     print(image);
+    // print(image2);
+      });
+    }
   }
 }

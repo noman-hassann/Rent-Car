@@ -8,13 +8,13 @@ import 'package:rent_house/widgets/textIconFunRow.dart';
 import 'package:rent_house/widgets/widgets.dart';
 
 class ExploreView extends StatelessWidget {
-  final ExploreModel indexPass;
+  final indexPass;
   const ExploreView({Key? key, required this.indexPass}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+ print(indexPass['images']['image']);
     return Scaffold(
         body: SafeArea(
             child: Column(
@@ -37,9 +37,16 @@ class ExploreView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    'assets/' + indexPass.image1,
-                  ),
+                  
+                  Image.network(
+                      "https://aremorch.com/wp-content/uploads/2016/09/The-Details-That-Matter-Top-Things-Every-Luxury-Hotel-Room-Should-Have.png",
+                      width: size.width * 0.3,
+                      height: 150,
+                      fit: BoxFit.fill),
+                   
+                  // Image.asset(
+                  //  indexPass['images'],
+                  // ),
                   const SizedBox(
                     width: 20,
                   ),
@@ -48,39 +55,40 @@ class ExploreView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            text(
-                              title: "Studio Apartment",
-                              fontsize: 12.0,
-                              fontweight: FontWeight.normal,
-                            ),
-                            const SizedBox(
-                              width: 70,
-                            ),
-                            const Icon(CupertinoIcons.heart),
-                          ],
+                        Container(
+                          width: size.width * 0.5,
+                         // color: Colors.amber,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              text(
+                                title:
+                                    indexPass['title'].toString().toUpperCase(),
+                                fontsize: 12.0,
+                                fontweight: FontWeight.bold,
+                              ),
+                            
+                              const Icon(CupertinoIcons.heart),
+                            ],
+                          ),
                         ),
                         textIconFunRow(
-                            title: "Kingdom Tower,Brazil",
+                            title:
+                                indexPass['address'].toString().toUpperCase(),
                             icon: Icons.location_on,
                             iconSize: 14.0,
                             fontsize: 12.0,
                             fontColor: textwhite,
-                            iconColor: Colors.black),
+                            iconColor: orange),
                         const SizedBox(
                           height: 10,
                         ),
                         textIconFunRow(
-                            title: "1900",
+                            title: indexPass['price'].toString().toUpperCase(),
                             icon: CupertinoIcons.money_dollar,
                             iconSize: 20.0,
                             fontsize: 12.0,
-                            fontColor: orange,
+                            fontColor: textwhite,
                             iconColor: orange),
                         const SizedBox(
                           height: 5,
@@ -93,19 +101,19 @@ class ExploreView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 textIconFunColumn(
-                                    title: "3 Beds",
+                                    title: 'Bed ${indexPass['bedrooms']}',
                                     icon: CupertinoIcons.bed_double_fill,
                                     iconColor: orange,
                                     fontColor: textwhite,
                                     fontsize: 12.0),
                                 textIconFunColumn(
-                                    title: "2 Bath",
+                                    title: 'Bath ${indexPass['bathrooms']}',
                                     icon: Icons.bathtub_outlined,
                                     iconColor: orange,
                                     fontColor: textwhite,
                                     fontsize: 12.0),
                                 textIconFunColumn(
-                                    title: "1 Parking",
+                                    title: 'Parking ${indexPass['parking']}',
                                     icon: CupertinoIcons.car_detailed,
                                     iconColor: orange,
                                     fontColor: textwhite,
