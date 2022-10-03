@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:dio/dio.dart';
+import 'package:rent_house/View/Admin/Navbar/adminNavbar.dart';
+import 'package:rent_house/View/Admin/View_Property/Admin.dart';
+import 'package:rent_house/View/Navigation/navBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:rent_house/screens/Navigation/navBar.dart';
 
 Future<String> signupApis({
   name,
@@ -33,24 +35,21 @@ Future<String> signupApis({
       apiURL,
       data: formData,
     );
-
-    // print("response datra " + responce.toString());
-
     SharedPreferences pref = await SharedPreferences.getInstance();
     var res1 = responce.data['user'];
+    var role = res1['role'];
     var token = res1['token'];
     pref.setString("token", token);
-
+    pref.setString("role", role);
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Navbar()),
+      MaterialPageRoute(
+          builder: (context) => role == 'agent' ? const AdminNavbar() : const Navbar()),
     );
-    Fluttertoast.showToast(
-        msg: "Login Successfull", backgroundColor: Colors.cyan);
     return '';
   } catch (e) {
     Fluttertoast.showToast(
-        msg: "User Already exists", backgroundColor: Colors.cyan);
-    return 'some thing wrong';
+        msg: "User Already exists ", backgroundColor: Colors.cyan);
+    return '';
   }
 }

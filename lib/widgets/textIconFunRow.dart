@@ -6,7 +6,7 @@ Container textIconFunRow({ title,icon,fontsize,iconColor,fontColor,iconSize}) {
     child: Row(
       children: [
      Icon(icon,size: iconSize,color:iconColor ),
-     SizedBox(width: 6,),
+    
      text(title:title,fontsize: fontsize,color:fontColor ),
     ]),
     );

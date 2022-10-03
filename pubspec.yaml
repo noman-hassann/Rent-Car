@@ -53,8 +53,6 @@ dependencies:
   dropdown_button2: ^1.6.3
   flutter_awesome_select: ^6.4.0
   multi_select_flutter: ^4.1.2
-  image_picker: ^0.8.5+3
-  file_picker: ^3.0.4
   awesome_select: ^5.2.0
   checkbox_grouped: ^1.8.1
   multi_image_picker: ^4.8.01
@@ -62,6 +60,14 @@ dependencies:
   http: ^0.13.4
   mime: ^1.0.2
   pull_to_refresh: ^2.0.0
+  flutter_carousel_slider: ^1.0.9
+  image_picker: ^0.8.5+3
+  multiselect_formfield: ^0.1.7
+  animated_splash_screen: ^1.3.0
+  page_transition: ^2.0.9
+  google_nav_bar: ^5.0.6
+  url_launcher: ^6.1.5
+  flutter_phone_direct_caller: ^2.1.1
 
 dev_dependencies:
   flutter_test:

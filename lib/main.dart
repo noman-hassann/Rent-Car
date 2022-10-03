@@ -1,33 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rent_house/screens/Admin/Add_New_Property/listProperty.dart';
-import 'package:rent_house/screens/Admin/View_Property/AdminViwe.dart';
-import 'package:rent_house/screens/Admin/View_Property/test.dart';
-import 'package:rent_house/screens/Admin/View_Property/viewTest.dart';
-import 'package:rent_house/screens/Explore/Explore.dart';
-import 'package:rent_house/screens/Home/details/details.dart';
-import 'package:rent_house/screens/Home/home.dart';
-import 'package:rent_house/screens/Liked/liked.dart';
-import 'package:rent_house/screens/LoginSignUp/View/signup.dart';
-import 'package:rent_house/screens/Navigation/navBar.dart';
-import 'package:rent_house/screens/Setting/setting.dart';
+import 'package:rent_house/View/Admin/Add_New_Property/AddProperty.dart';
+import 'package:rent_house/View/Admin/View_Property/Admin.dart';
+import 'package:rent_house/View/Explore/Explore.dart';
+
+import 'package:rent_house/View/Favourite/favourite.dart';
+import 'package:rent_house/View/LoginSignUp/View/signup.dart';
+import 'package:rent_house/View/Navigation/navBar.dart';
+import 'package:rent_house/View/Setting/setting.dart';
+import 'package:rent_house/splash.dart';
 import 'package:rent_house/test2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
+import 'View/LoginSignUp/View/login.dart';
+import 'View/SelectAbleList/selectable.dart';
 
-import 'screens/LoginSignUp/View/login.dart';
+// GetRole() async {
+//   SharedPreferences pref = await SharedPreferences.getInstance();
+//   var role = pref.getString('role');
+//   return role;
+// }
 
-// @dart=2.9
-var token;
 Future<void> main() async {
-
   runApp(const MyApp());
-  SharedPreferences pref = await SharedPreferences.getInstance();
-  token = pref.getString('token');
-  print("tokenmain" + token);
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -37,21 +33,23 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         getPages: [
-          GetPage(name: "/Navbar", page: () => const LandingPage()),
-        //  GetPage(name: "/home", page: () =>const Home()),
-          GetPage(name: "/liked", page: () => Liked()),
-          GetPage(name: "/Explore", page: () => Explore()),
-          GetPage(name: "/Setting", page: () => Setting()),
-          GetPage(name: "/detail", page: () => const Detail()),
+          //      GetPage(name: "/Navbar", page: () => const LandingPage()),
+          //  GetPage(name: "/home", page: () =>const Home()),
+          GetPage(name: "/liked", page: () => const favourite()),
+          GetPage(name: "/Explore", page: () => const Explore()),
+          GetPage(name: "/Setting", page: () => const Setting()),
           GetPage(name: "/signup", page: () => const SignupScreen()),
           GetPage(name: "/Navbar", page: () => const Navbar()),
           GetPage(name: "/login", page: () => LoginScreen()),
-          GetPage(name: "/listProperty", page: () => ListProperty()),
-          GetPage(name: "/AdminProperty", page: () => AdminProperty()),
-        //  GetPage(name: "/HotelView", page: () => HotelView()),
+          GetPage(name: "/listProperty", page: () => const AddProperty()),
+          GetPage(name: "/AdminProperty", page: () => const Admin()),
+          // GetPage(name: "/homedetails", page: () => const HomeDetail()),
+          //  GetPage(name: "/HotelView", page: () => HotelView()),
         ],
-       /// initialRoute: "/AdminProperty");
-       home:  AdminProperty());
-      //  home: (token == null) ? ListProperty() : Navbar());
+        /// initialRoute: "/AdminProperty");
+     //   home: SelectAbleList()
+        // home: SplashView()
+        home: SelectAbleList()
+         );
   }
 }

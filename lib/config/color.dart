@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
 
 const orange =Color(0xEEDD9C35);
 const textwhite =Color(0xEEC1C1C1);
