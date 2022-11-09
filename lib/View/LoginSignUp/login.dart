@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
 import 'package:rent_house/Conrtoller/loginSignupApis/loginApis.dart';
-import 'package:rent_house/config/color.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rent_house/View/Home/home.dart';
 import 'package:validators/validators.dart';
-
-import '../../GuestScreen/guestNavbar.dart';
+import '../../Config/color.dart';
+import '../Navigation/navBar.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -50,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white.withOpacity(0.6),
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: SingleChildScrollView(
@@ -65,11 +65,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image:
-                              const AssetImage('assets/images/realEstate.jpg'),
+                              const AssetImage('assets/images/rental.jpg'),
                           fit: BoxFit.fitHeight,
                           colorFilter: ColorFilter.mode(
                               Colors.black.withOpacity(0.5),
-                              BlendMode.colorBurn),
+                              BlendMode.darken),
                         ),
                       ),
                     ),
@@ -80,6 +80,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             : EdgeInsets.only(top: 150),
                         child: Column(
                           children: [
+                            Text(
+                              'Welcome to the Car Rental System',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                overflow: TextOverflow.fade,
+                                color: Color.fromARGB(255, 255, 255, 255)
+                                    .withOpacity(.8),
+                              ),
+                            ),
                             SizedBox(
                               width: size.width * .9,
                               height: size.height * 0.5,
@@ -96,12 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           .withOpacity(.8),
                                     ),
                                   ),
-                                  // component(
-                                  //   Icons.account_circle_outlined,
-                                  //   'User name...',
-                                  //   false,
-                                  //   false,
-                                  // ),
+                               
                                   component(
                                     icon: Icons.email_outlined,
                                     hintText: 'Email...',
@@ -115,71 +120,38 @@ class _LoginScreenState extends State<LoginScreen> {
                                       isEmail: false,
                                       isPassword: true,
                                       textediting: myControllerPassword),
-                                  InkWell(
-                                    onTap: () async {
-                                      SharedPreferences pref =
-                                          await SharedPreferences.getInstance();
 
-                                      Get.to(GuestNavbar());
-                                      pref.setString(
-                                        "role",
-                                        'guest',
-                                      );
-                                    },
-                                    child: Container(
-                                      //  color: Colors.amberAccent,
-                                      alignment: Alignment.topRight,
-                                      width: size.width * .8,
-                                      child: RichText(
-                                        text: const TextSpan(
-                                          text: 'Login As Guest',
-                                          style: TextStyle(
-                                            decoration:
-                                                TextDecoration.underline,
-                                            color: Colors.white,
-                                          ),
-                                          // recognizer: TapGestureRecognizer()
-                                          //   ..onTap = () {
-                                          //     HapticFeedback.lightImpact();
-                                          //     Fluttertoast.showToast(
-                                          //       msg:
-                                          //           'Forgotten password! button pressed',
-                                          //     );
-                                          //   },
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                                   //  SizedBox(height: size.width * .2),
                                   InkWell(
                                     splashColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () {
-                                      setState(() {
-                                        isloading = true;
-                                      });
+                                      Get.to(Navbar());
+                                      // setState(() {
+                                      //   isloading = true;
+                                      // });
 
-                                      if (validData() == true) {
-                                        loginApis(
-                                                email: myControllerEmail.text,
-                                                password:
-                                                    myControllerPassword.text,
-                                                context: context)
-                                            .then((value) => {
-                                                  setState(() {
-                                                    isloading = false;
-                                                  }),
-                                                });
-                                      } else {
-                                        setState(() {
-                                          isloading = false;
-                                        });
-                                      }
+                                      // if (validData() == true) {
+                                      //   loginApis(
+                                      //           email: myControllerEmail.text,
+                                      //           password:
+                                      //               myControllerPassword.text,
+                                      //           context: context)
+                                      //       .then((value) => {
+                                      //             setState(() {
+                                      //               isloading = false;
+                                      //             }),
+                                      //           });
+                                      // } else {
+                                      //   setState(() {
+                                      //     isloading = false;
+                                      //   });
+                                      // }
                                     },
                                     child: Container(
-                                      //color: Colors.amber,
                                       child: Column(
                                         children: [
+                                          
                                           Container(
                                             margin: EdgeInsets.only(
                                               bottom: size.width * .05,
@@ -188,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             width: size.width / 1.25,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
-                                              color: orange,
+                                              color: blue,
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                             ),
@@ -247,16 +219,16 @@ class _LoginScreenState extends State<LoginScreen> {
       alignment: Alignment.center,
       padding: EdgeInsets.only(right: size.width / 30),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(.1),
+        color: Colors.white.withOpacity(0.5),
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextField(
         controller: textediting,
         style: TextStyle(
-          color: Colors.white.withOpacity(.9),
+          color: Colors.black.withOpacity(0.6),
         ),
         //  controller: textediting,
-        // obscureText: _passwordVisible,
+        obscureText: _passwordVisible,
         keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
         decoration: InputDecoration(
           //  suffixIcon: IconButton(
@@ -274,21 +246,19 @@ class _LoginScreenState extends State<LoginScreen> {
           // ),
           prefixIcon: Icon(
             icon,
-            color: Colors.white.withOpacity(.8),
+            color: Colors.black.withOpacity(.8),
           ),
           border: InputBorder.none,
           hintMaxLines: 1,
           hintText: hintText,
           hintStyle: TextStyle(
             fontSize: 14,
-            color: Colors.white.withOpacity(.5),
+            color: Colors.black.withOpacity(.5),
           ),
         ),
       ),
     );
   }
-
-
 }
 
 class MyBehavior extends ScrollBehavior {

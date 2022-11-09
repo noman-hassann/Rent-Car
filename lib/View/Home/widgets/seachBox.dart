@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_house/View/Home/widgets/PopUpOverLay.dart';
-import 'package:rent_house/config/color.dart';
+
 import 'package:searchbar_animation/searchbar_animation.dart';
 
 // Container txtField({text, context, ontap, icon, hintText}) {
@@ -25,7 +25,7 @@ import 'package:searchbar_animation/searchbar_animation.dart';
 //         ),
 //       ),
 //       child: TextField(
-//         style: const TextStyle(fontSize: 13.0, color: textwhite),
+//         style: const TextStyle(fontSize: 13.0, color: white),
 //         decoration: InputDecoration(
 //           border: InputBorder.none,
 //           contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -43,7 +43,7 @@ import 'package:searchbar_animation/searchbar_animation.dart';
 //             }),
 //             child: const Icon(
 //               CupertinoIcons.money_dollar,
-//               color: textwhite,
+//               color: white,
 //               size: 20,
 //             ),
 //           ),

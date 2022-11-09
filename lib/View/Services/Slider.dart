@@ -2,24 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
 import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
-import 'package:rent_house/config/color.dart';
+
+import '../../Config/color.dart';
 
 class AnimationSlider extends StatefulWidget {
-  final indexImages;
-  AnimationSlider({Key, key, required this.indexImages}) : super(key: key);
-// 
+  AnimationSlider({
+    Key,
+    key,
+  }) : super(key: key);
+//
   @override
   _AnimationSliderState createState() => _AnimationSliderState();
 }
 
 class _AnimationSliderState extends State<AnimationSlider> {
-  // final List<String> item = [
-  //   "https://aremorch.com/wp-content/uploads/2016/09/The-Details-That-Matter-Top-Things-Every-Luxury-Hotel-Room-Should-Have.png",
-  //   "https://aremorch.com/wp-content/uploads/2016/09/The-Details-That-Matter-Top-Things-Every-Luxury-Hotel-Room-Should-Have.png",
-  //   "https://aremorch.com/wp-content/uploads/2016/09/The-Details-That-Matter-Top-Things-Every-Luxury-Hotel-Room-Should-Have.png",
-  //   "https://aremorch.com/wp-content/uploads/2016/09/The-Details-That-Matter-Top-Things-Every-Luxury-Hotel-Room-Should-Have.png",
-  //   "https://aremorch.com/wp-content/uploads/2016/09/The-Details-That-Matter-Top-Things-Every-Luxury-Hotel-Room-Should-Have.png",
-  // ];
+  final List<String> imgesList = [
+    "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/244206/pexels-photo-244206.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/100656/pexels-photo-100656.jpeg?auto=compress&cs=tinysrgb&w=600"
+  ];
   bool _isPlaying = false;
   late CarouselSliderController _sliderController;
   @override
@@ -45,21 +46,18 @@ class _AnimationSliderState extends State<AnimationSlider> {
               slideBuilder: (index) {
                 return Container(
                   alignment: Alignment.center,
-                  child: Image.network(
-                      "https://denga.r3therapeutic.com/public${ widget.indexImages[index]['image_name']}",
-                     // widget.indexImages[index],
-                      fit: BoxFit.fill,
-                      width: width * 1),
+                  child: Image.network(imgesList[index],
+                      fit: BoxFit.fill, width: width * 1),
                 );
               },
-              slideTransform:const AccordionTransform(),
+              slideTransform: const AccordionTransform(),
               slideIndicator: CircularSlideIndicator(
                 padding: EdgeInsets.only(bottom: 32),
-                indicatorBorderColor: textwhite,
+                indicatorBorderColor: white,
                 indicatorBackgroundColor: Colors.white,
-                currentIndicatorColor: orange,
+                currentIndicatorColor: blue,
               ),
-              itemCount: widget.indexImages.length,
+              itemCount: imgesList.length,
               initialPage: 0,
               enableAutoSlider: true,
             ),

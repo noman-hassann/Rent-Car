@@ -1,15 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:rent_house/Conrtoller/Filter/updateApis.dart';
-import 'package:rent_house/View/LoginSignUp/View/login.dart';
-import 'package:rent_house/config/color.dart';
 import 'package:rent_house/View/Navigation/navBar.dart';
 import 'package:rent_house/View/Setting/widgets/textWidget.dart';
 import 'package:rent_house/widgets/rowButton.dart';
 import 'package:rent_house/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Config/color.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
@@ -62,7 +59,7 @@ class _SettingState extends State<Setting> {
         address.text.toString().isEmpty &&
         contact.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        backgroundColor: orange,
+        backgroundColor: blue,
         content: Text("Enter Value to to update"),
         duration: Duration(milliseconds: 1000),
       ));
@@ -103,7 +100,7 @@ class _SettingState extends State<Setting> {
                             icon: const Icon(
                               Icons.arrow_back,
                               size: 25,
-                              color: orange,
+                              color: blue,
                             ),
                             onPressed: () {
                               Navigator.push(
@@ -115,13 +112,6 @@ class _SettingState extends State<Setting> {
                           ),
                         ),
                       ),
-                      text(
-                          title: "",
-                          fontsize: 20.0,
-                          fontweight: FontWeight.normal,
-                          color: const Color.fromARGB(255, 15, 5, 5)),
-                      const Image(
-                          image: AssetImage('assets/images/iconTop.png')),
                     ],
                   ),
 
@@ -176,7 +166,6 @@ class _SettingState extends State<Setting> {
                           );
                         },
                       );
-                
                     },
                     child: textWidget(
                       text1: "Name",
@@ -275,7 +264,7 @@ class _SettingState extends State<Setting> {
 
                   Center(
                     child: rowButtonFun(
-                        backgroundcolor: orange,
+                        backgroundcolor: blue,
                         title1: "Update",
                         height: size.height * 0.04,
                         width: size.width * 0.43,

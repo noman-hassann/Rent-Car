@@ -1,38 +1,22 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:rent_house/Conrtoller/FavouriteApis/favouriteApis.dart';
-import 'package:rent_house/Conrtoller/FavouriteApis/unfavourite.dart';
+
 import 'package:rent_house/View/Services/Slider.dart';
-import 'package:rent_house/config/color.dart';
-import 'package:rent_house/test2.dart';
-import 'package:rent_house/widgets/icons.dart';
-import 'package:rent_house/widgets/textButton.dart';
-import 'package:rent_house/widgets/textIconFunColumn.dart';
 import 'package:rent_house/widgets/widgets.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+import '../../Config/color.dart';
 
 class HomeDetail extends StatefulWidget {
-  final indexPass;
-  const HomeDetail({super.key, required this.indexPass});
+  const HomeDetail({
+    super.key,
+  });
 
   @override
   State<HomeDetail> createState() => _HomeDetailtate();
 }
 
 class _HomeDetailtate extends State<HomeDetail> {
-  String? firstHalf;
-  String? secondHalf;
-  String? txt;
-
-  bool flag = true;
-  late bool favourite = widget.indexPass['isfavourite'] == true ? true : false;
-
   @override
   void initState() {
     super.initState();
@@ -40,87 +24,71 @@ class _HomeDetailtate extends State<HomeDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var image = widget.indexPass['images'];
-    String others = widget.indexPass['others'];
-    String number = widget.indexPass['user']['contact'];
-    var iconDescription = widget.indexPass['isfavourite'];
-
-    String txt = widget.indexPass['description'].toString();
-    if (txt.length > 250) {
-      firstHalf = txt.substring(0, 250);
-      secondHalf = txt.substring(50, txt.length);
-    } else {
-      firstHalf = txt;
-      secondHalf = "";
-    }
     Size size = MediaQuery.of(context).size;
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Stack(children: [
           SingleChildScrollView(
-            child: Column(children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Container(
+                height: 40,
+                width: MediaQuery.of(context).size.width * 1,
+                alignment: Alignment.topLeft,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: black,
+                        size: 30,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 18.0),
+                child: Column(
+                  children: [
+                    text(
+                        title: "Camoro",
+                        fontsize: 30.0,
+                        fontweight: FontWeight.bold),
+                    text(
+                        title: "by Toyota",
+                        fontsize: 25.0,
+                        fontweight: FontWeight.normal,
+                        color: black.withOpacity(0.4)),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Stack(children: [
                 Positioned(
-                  child: AnimationSlider(indexImages: image),
-                  height: height * 0.5,
+                  top: 0,
+                  child: AnimationSlider(),
+                  height: height * 0.4,
                   width: width,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     //Drawer opening and topbar widgets
-                    Container(
-                      height: 40,
-                      width: MediaQuery.of(context).size.width * 1,
-                      alignment: Alignment.topLeft,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.arrow_back,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              if (favourite == true) {
-                                ///  print(widget.indexPass['id']);
-                                setState(() {
-                                  favourite = false;
-                                  RemovefavouriteApis(
-                                      property_id: widget.indexPass['id'],
-                                      context: context);
-                                });
-                              } else {
-                                setState(() {
-                                  favourite = true;
-                                  favouriteApis(
-                                      property_id: widget.indexPass['id'],
-                                      context: context);
-                                });
-                              }
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: iconFun(
-                                  icon: favourite == true
-                                      ? CupertinoIcons.heart_fill
-                                      : CupertinoIcons.heart),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+
                     SizedBox(
                       height: size.height * 0.22,
                     ),
+
                     Container(
                       height: size.height * 0.09,
                       //     color: Colors.amber,
@@ -137,304 +105,187 @@ class _HomeDetailtate extends State<HomeDetail> {
                               ),
                             ],
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 30.0),
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundColor:
-                                  Color.fromARGB(255, 235, 233, 233),
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.send,
-                                  size: 30,
-                                  color: orange,
-                                ),
-                                onPressed: () {},
-                              ),
-                            ),
-                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
               ]),
-              // SizedBox(height: height * 0.03),
-              Container(
-                width: size.width * 0.9,
-                alignment: Alignment.topRight,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      text(
-                          title: widget.indexPass['title']
-                              .toString()
-                              .toUpperCase(),
-                          fontsize: 19.0,
-                          fontweight: FontWeight.bold),
-                      SizedBox(height: height * 0.01),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          text(
-                              title: "Area",
-                              fontsize: 18.0,
-                              fontweight: FontWeight.normal,
-                              color: textwhite),
-                          // text(
-                          //     title: widget.indexPass['title']
-                          //         .toString()
-                          //         .toUpperCase(),
-                          //     fontsize: 14.0,
-                          //     fontweight: FontWeight.normal,
-                          //     color: textwhite),
-                          text(
-                              title: "${widget.indexPass['area']} Sq.Ft",
-                              fontsize: 14.0,
-                              fontweight: FontWeight.bold,
-                              color: orange),
-                        ],
-                      ),
-                      SizedBox(
-                        height: size.height * 0.015,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          text(
-                              title: "Price",
-                              fontsize: 18.0,
-                              fontweight: FontWeight.normal,
-                              color: textwhite),
-                          text(
-                              title: "K ${widget.indexPass['price']}  ",
-                              fontsize: 14.0,
-                              fontweight: FontWeight.bold,
-                              color: orange),
-                        ],
-                      ),
-                      SizedBox(
-                        height: size.height * 0.015,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Row(
-                          children: [
-                            textIconFunColumn(
-                                title: "${widget.indexPass['bedrooms']} Beds",
-                                icon: CupertinoIcons.bed_double_fill,
-                                iconColor: orange,
-                                fontColor: textwhite,
-                                fontsize: 12.0),
-                            SizedBox(
-                              width: size.width * 0.05,
-                            ),
-                            textIconFunColumn(
-                                title: "${widget.indexPass['bathrooms']} Bath",
-                                icon: Icons.bathtub_outlined,
-                                iconColor: orange,
-                                fontColor: textwhite,
-                                fontsize: 12.0),
-                            SizedBox(
-                              width: size.width * 0.05,
-                            ),
-                            textIconFunColumn(
-                                title: "${widget.indexPass['parking']} Parking",
-                                icon: CupertinoIcons.car_detailed,
-                                iconColor: orange,
-                                fontColor: textwhite,
-                                fontsize: 12.0),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: size.height * 0.01,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          text(
-                              title: "NearBy ",
-                              fontsize: 14.0,
-                              fontweight: FontWeight.bold,
-                              color: textwhite),
-                          SizedBox(
-                            height: size.height * 0.015,
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                      height: size.height * 0.13,
+                      width: size.width * 0.3,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: black.withOpacity(0.3),
                           ),
-                          Container(
-                            //  color: Colors.amber,
-                            height: size.height * 0.06,
-
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  others.contains("Restaurants")
-                                      ? textIconFunColumn(
-                                          title: "Restaurants",
-                                          icon: FontAwesomeIcons.hotel,
-                                          iconColor: orange,
-                                          fontColor: textwhite,
-                                          fontsize: 12.0)
-                                      : Container(),
-                                  SizedBox(
-                                    width: size.width * 0.05,
-                                  ),
-                                  others.contains("Scool")
-                                      ? textIconFunColumn(
-                                          title: " School",
-                                          icon: FontAwesomeIcons.school,
-                                          iconColor: orange,
-                                          fontColor: textwhite,
-                                          fontsize: 12.0)
-                                      : Container(),
-                                  SizedBox(
-                                    width: size.width * 0.05,
-                                  ),
-                                  others.contains("Malls")
-                                      ? textIconFunColumn(
-                                          title: " Malls",
-                                          icon: FontAwesomeIcons.building,
-                                          iconColor: orange,
-                                          fontColor: textwhite,
-                                          fontsize: 12.0)
-                                      : Container(),
-                                  SizedBox(
-                                    width: size.width * 0.05,
-                                  ),
-                                  others.contains("Bar")
-                                      ? textIconFunColumn(
-                                          title: " Bar",
-                                          icon: FontAwesomeIcons.wineGlass,
-                                          iconColor: orange,
-                                          fontColor: textwhite,
-                                          fontsize: 12.0)
-                                      : Container(),
-                                  SizedBox(
-                                    width: size.width * 0.05,
-                                  ),
-                                  others.contains("Gym")
-                                      ? textIconFunColumn(
-                                          title: " Gym",
-                                          icon: FontAwesomeIcons.dumbbell,
-                                          iconColor: orange,
-                                          fontColor: textwhite,
-                                          fontsize: 12.0)
-                                      : Container(),
-                                  SizedBox(
-                                    width: size.width * 0.05,
-                                  ),
-                                  others.contains("Hospital")
-                                      ? textIconFunColumn(
-                                          title: " Hospital",
-                                          icon: FontAwesomeIcons.dumbbell,
-                                          iconColor: orange,
-                                          fontColor: textwhite,
-                                          fontsize: 12.0)
-                                      : Container()
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: size.height * 0.01,
-                      ),
-                      text(
-                          title: "Details ",
-                          fontsize: 14.0,
-                          fontweight: FontWeight.bold,
-                          color: textwhite),
-                      SizedBox(
-                        height: size.height * 0.01,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: SingleChildScrollView(
-                          child: Container(
-                            height: height * 0.13,
-                            width: width,
-                            child: textStart(
-                              title: txt,
-                              //  if(title)
-                              // title: flag
-                              //     ? ("${firstHalf!}...")
-                              //     : (firstHalf! + secondHalf!),
-                              fontsize: 15.0,
-                              fontweight: FontWeight.normal,
-                              color: textwhite,
-                            ),
-                          ),
-                        ),
-                      ),
-                
-                
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          textButton(
-                            text1: "Posted By",
-                            text2: widget.indexPass['user']['name']
-                                .toString()
-                                .toUpperCase(),
-                            // buttonTitle: "Call",
-                            widgetpass: const Image(
-                              image: AssetImage('assets/images/iconTop.png'),
-                              height: 40,
-                              width: 50,
-                            ),
-                          ),
-                          textButton(
-                            text1: "Date: ",
-                            text2:
-                                '/t ${widget.indexPass['user']['created_at']}'
-                                    .substring(2, 13),
-                            // buttonTitle: "Message",
-                            widgetpass: const SizedBox(
-                              height: 40,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      Row(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          InkWell(
-                            onTap: () async {
-                              await FlutterPhoneDirectCaller.callNumber(
-                                  '$number');
-                            },
-                            child: button(
-                              buttonTitle: "Call",
-                              size: size,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () async {
-                              await launchUrl(Uri.parse("sms:$number"));
-                            },
-                            child: button(
-                              buttonTitle: "Message",
-                              size: size,
-                            ),
-                          )
+                          text(
+                              title: '1 Day',
+                              fontsize: 12.0,
+                              fontweight: FontWeight.bold),
+                          text(
+                              title: '12000 ',
+                              fontsize: 15.0,
+                              fontweight: FontWeight.bold),
+                          text(
+                              title: 'PKR ',
+                              fontsize: 12.0,
+                              fontweight: FontWeight.normal)
                         ],
-                      )
-                    ]),
-                    
+                      )),
+                  Container(
+                      height: size.height * 0.13,
+                      width: size.width * 0.3,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: black.withOpacity(0.3),
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          text(
+                              title: '1 Month',
+                              fontsize: 12.0,
+                              fontweight: FontWeight.bold),
+                          text(
+                              title: '12000 ',
+                              fontsize: 15.0,
+                              fontweight: FontWeight.bold),
+                          text(
+                              title: 'PKR ',
+                              fontsize: 12.0,
+                              fontweight: FontWeight.normal)
+                        ],
+                      )),
+                  Container(
+                      height: size.height * 0.13,
+                      width: size.width * 0.3,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: black.withOpacity(0.3),
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          text(
+                              title: '1 Year',
+                              fontsize: 12.0,
+                              fontweight: FontWeight.bold),
+                          text(
+                              title: '12000 ',
+                              fontsize: 15.0,
+                              fontweight: FontWeight.bold),
+                          text(
+                              title: 'PKR ',
+                              fontsize: 12.0,
+                              fontweight: FontWeight.normal)
+                        ],
+                      )),
+                ],
               ),
-               SizedBox(
-                        height: height * 0.03,
-                      ),
+              Padding(
+                padding: const EdgeInsets.only(left: 18.0, top: 30),
+                child: text(
+                    title: "Specifications ",
+                    fontsize: 25.0,
+                    fontweight: FontWeight.normal,
+                    color: black.withOpacity(0.4)),
+              ),
+              SizedBox(
+                height: 100,
+                child: GridView.builder(
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: 5,
+                    scrollDirection: Axis.horizontal,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      // mainAxisSpacing: 2.0,
+                      crossAxisSpacing: 1.0,
+                      mainAxisExtent: 140,
+                      crossAxisCount: 1,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return (Row(
+                        children: [
+                          Container(
+                            height: size.height * 0.1,
+                            width: size.width * 0.35,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: black.withOpacity(0.3),
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(20))),
+                            child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  text(
+                                      title: "Color",
+                                      color: black.withOpacity(0.3),
+                                      fontsize: 14.0,
+                                      fontweight: FontWeight.normal),
+                                  text(
+                                      title: "Color",
+                                      color: black,
+                                      fontsize: 14.0,
+                                      fontweight: FontWeight.bold)
+                                ]),
+                          ),
+                        ],
+                      ));
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 38.0),
+                child: Container(
+                    height: size.height * 0.1,
+                    width: size.width * 0.8,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: blue),
+                        color: blue,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            text(
+                                title: "Book Now",
+                                fontsize: 20.0,
+                                fontweight: FontWeight.bold,
+                                color: Colors.white),
+                          ],
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: Colors.white,
+                        )
+                      ],
+                    )),
+              ),
             ]),
-          )
+          ),
         ]),
       ),
     );
   }
 }
-

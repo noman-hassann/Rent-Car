@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:group_radio_button/group_radio_button.dart';
-import 'package:rent_house/config/color.dart';
+
+import '../../../Config/color.dart';
+
+
 
 // class showDialogWithFields extends StatefulWidget {
 //   final text1;
@@ -45,7 +48,7 @@ import 'package:rent_house/config/color.dart';
 //             //   //                                   () => _singleValue =
 //             //   //                                       value.toString(),
 //             //   //                                 ),
-//             //   //                                 activeColor: orange,
+//             //   //                                 activeColor: blue,
 //             //   //                               ),
 //             //   //                               RadioButton(
 //             //   //                                 description: "High to low",
@@ -55,7 +58,7 @@ import 'package:rent_house/config/color.dart';
 //             //   //                                   () => _singleValue =
 //             //   //                                       value.toString(),
 //             //   //                                 ),
-//             //   //                                 activeColor: orange,
+//             //   //                                 activeColor: blue,
 //             //   //                               ),
 //             //   //                             ],
 //             //   //                           ),
@@ -175,7 +178,7 @@ class GenderPopUPState extends State<GenderPopUP>
             onChanged: (value) => setState(
               () => _singleValue = value.toString(),
             ),
-            activeColor: orange,
+            activeColor: blue,
           ),
           RadioButton(
             description: "Female",
@@ -184,7 +187,7 @@ class GenderPopUPState extends State<GenderPopUP>
             onChanged: (value) => setState(
               () => _singleValue = value.toString(),
             ),
-            activeColor: orange,
+            activeColor: blue,
           ),
         ],
       ),

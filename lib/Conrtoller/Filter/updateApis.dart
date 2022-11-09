@@ -5,9 +5,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:dio/dio.dart';
-import 'package:rent_house/Config/color.dart';
+
 import 'package:rent_house/View/Navigation/navBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Config/color.dart';
 
 Dio dio = Dio();
 var apiURL = 'https://denga.r3therapeutic.com/public/api/updateProfile';
@@ -57,20 +59,20 @@ Future<String> updateData({
           MaterialPageRoute(builder: (context) => const Navbar()),
         );
         Fluttertoast.showToast(
-            msg: " Updated Successfull", backgroundColor: orange);
+            msg: " Updated Successfull", backgroundColor: blue);
         const Duration(milliseconds: 800);
       } else {
-        Fluttertoast.showToast(msg: "Try Again Later", backgroundColor: orange);
+        Fluttertoast.showToast(msg: "Try Again Later", backgroundColor: blue);
 
         const Duration(milliseconds: 500);
       }
     } else {
       Fluttertoast.showToast(
-          msg: "Please connect to internet", backgroundColor: orange);
+          msg: "Please connect to internet", backgroundColor: blue);
     }
   } on SocketException catch (_) {
     Fluttertoast.showToast(
-        msg: "Something went Wrong try again later", backgroundColor: orange);
+        msg: "Something went Wrong try again later", backgroundColor: blue);
 
     const Duration(milliseconds: 500);
   }

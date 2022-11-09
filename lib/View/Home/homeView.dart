@@ -1,26 +1,27 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:rent_house/View/Home/homedetails.dart';
-import 'package:rent_house/config/color.dart';
-import 'package:rent_house/widgets/colorText.dart';
-import 'package:rent_house/widgets/textIconFunRow.dart';
+
 import 'package:rent_house/widgets/widgets.dart';
 
-class HomeRoomView extends StatelessWidget {
+
+class RentailView extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
   final indexPass;
-  const HomeRoomView({Key? key, required this.indexPass}) : super(key: key);
+  const RentailView({Key? key, required this.indexPass}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var image = indexPass['images'];
+    // var image = indexPass['images'];
 
     return Scaffold(
         body: SafeArea(
             child: InkWell(
       onTap: () {
-        Get.to(HomeDetail(indexPass: indexPass),
+        Get.to(HomeDetail(),
             transition: Transition.rightToLeft,
             duration: const Duration(milliseconds: 300));
       },
@@ -37,7 +38,7 @@ class HomeRoomView extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(25)),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  height: size.height * 0.32,
+                  height: size.height * 0.25,
                   width: size.width * 0.45,
                   child: Padding(
                     padding: const EdgeInsets.only(),
@@ -46,18 +47,31 @@ class HomeRoomView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(25),
-                                topRight: Radius.circular(25)),
-                            child: Image.network(
-                                "https://denga.r3therapeutic.com/public${image[0]['image_name']}",
-                                width: size.width * 1,
-                                height: 150,
-                                fit: BoxFit.fill),
+                          child: Stack(
+                            alignment: Alignment.topRight,
+                            children: [
+
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(25),
+                                    topRight: Radius.circular(25)),
+                                child: Image.network(
+                                    // "https://denga.r3therapeutic.com/public${image[0]['image_name']}",
+                                    "https://imgd.aeplcdn.com/1056x594/n/cw/ec/123185/grand-vitara-exterior-right-front-three-quarter-2.jpeg?isig=0&q=75&wm=1",
+                                    width: size.width * 1,
+                                    height: 200,
+                                    fit: BoxFit.fill),
+                              ),
+                              const Padding (
+                                padding:  EdgeInsets.only(top:8.0,right:8),
+                                child: Icon(CupertinoIcons.heart),
+                              )
+                            ],
                           ),
                         ),
-                        SizedBox(height: size.height*0.01,),
+                        SizedBox(
+                          height: size.height * 0.01,
+                        ),
                         Padding(
                           padding:
                               const EdgeInsets.only(left: 10.0, bottom: 10),
@@ -65,50 +79,22 @@ class HomeRoomView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  text(
-                                    title: indexPass['title'].toString(),
-                                    fontsize: 12.0,
-                                    fontweight: FontWeight.normal,
-                                  ),
-                                  SizedBox(width: size.width*0.02,),
-                                        textIconFunRow(
-                                  title: indexPass['address'].toString(),
-                                  icon: Icons.location_on,
-                                  fontsize: 12.0,
-                                  iconSize: 15.0,
-                                  fontColor: textwhite,
-                                  iconColor: orange),
-                                ],
+                              text(
+                                title: "Discover",
+                                fontsize: 12.0,
+                                fontweight: FontWeight.normal,
                               ),
-                        
-                              colorText(
-                                  title1: "Price:",
-                                  t1Color: textwhite,
-                                  title2: '${indexPass['price']}/ Month',
-                                  t2Color: orange,
-                                  fontsize: 10.0),
-                              colorText(
-                                  title1: "Neighbourhood:",
-                                  t1Color: textwhite,
-                                  title2: "Chinsapo",
-                                  t2Color: orange,
-                                  fontsize: 10.0),
-                              colorText(
-                                  title1: "Bedroom:",
-                                  t1Color: textwhite,
-                                  title2: '${indexPass['bedrooms']}',
-                                  t2Color: orange,
-                                  fontsize: 10.0),
-                              colorText(
-                                  title1: "Date:",
-                                  t1Color: textwhite,
-                                  title2:
-                                      '/t ${indexPass['user']['created_at']}'
-                                          .substring(2, 13),
-                                  t2Color: orange,
-                                  fontsize: 10.0),
+                              text(
+                                title: "Land Rover",
+                                fontsize: 15.0,
+                                fontweight: FontWeight.bold,
+                              ),
+                               text(
+                                title: "Per Week",
+                                fontsize: 12.0,
+                                fontweight: FontWeight.normal,
+                                color: Color.fromARGB(255, 69, 68, 68)
+                              ),
                             ],
                           ),
                         ),

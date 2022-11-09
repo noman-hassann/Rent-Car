@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:dio/dio.dart';
-import 'package:rent_house/Config/color.dart';
+
 import 'package:rent_house/View/Navigation/navBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Config/color.dart';
 
 // ignore: non_constant_identifier_names
 Future<String> favouriteApis({var property_id, context}) async {
@@ -31,14 +33,14 @@ Future<String> favouriteApis({var property_id, context}) async {
       //   MaterialPageRoute(builder: (context) => Navbar()),
       // );
       Fluttertoast.showToast(
-          msg: "Save to Favourite", backgroundColor: orange);
+          msg: "Save to Favourite", backgroundColor: blue);
     } else {
       Fluttertoast.showToast(
-          msg: "Can not save to Favourite ", backgroundColor: orange);
+          msg: "Can not save to Favourite ", backgroundColor: blue);
     }
   } catch (e) {
     Fluttertoast.showToast(
-        msg: "Error", backgroundColor: orange);
+        msg: "Error", backgroundColor: blue);
     return 'some thing wrong';
   }
   return '';

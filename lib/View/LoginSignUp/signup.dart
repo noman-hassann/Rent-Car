@@ -4,10 +4,15 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
+import 'package:http/http.dart';
+
 import 'package:rent_house/Conrtoller/loginSignupApis/SignupApis.dart';
-import 'package:rent_house/config/color.dart';
+
 import 'package:rent_house/widgets/widgets.dart';
 import 'package:validators/validators.dart';
+
+import '../../Config/color.dart';
+import '../Navigation/navBar.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -79,25 +84,11 @@ class _SignupScreenState extends State<SignupScreen> {
       return true;
     }
 
-    // validata() {
-    //   if (myControllerName.text.trim().isEmpty ||
-    //       myControllerContact.text.trim().isEmpty ||
-    //       myControllerAddress.text.trim().isEmpty ||
-    //       myControllerPassword.text.trim().isEmpty ||
-    //       myControllerEmail.text.trim().isEmpty
-    //          ) {
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       const SnackBar(
-    //         content: Text('Field should not be empty'),
-    //       ),
-    //     );
-    //   } else {
-    //     return true;
-    //   }
-    // }
+ 
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+backgroundColor: Colors.white.withOpacity(0.6),
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: SingleChildScrollView(
@@ -113,11 +104,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image:
-                              const AssetImage('assets/images/realEstate.jpg'),
+                              const AssetImage('assets/images/rental.jpg'),
                           fit: BoxFit.fitHeight,
                           colorFilter: ColorFilter.mode(
                               Colors.black.withOpacity(0.5),
-                              BlendMode.colorBurn),
+                              BlendMode.darken),
                         ),
                       ),
                     ),
@@ -179,91 +170,72 @@ class _SignupScreenState extends State<SignupScreen> {
                                       isEmail: false,
                                       isPassword: true,
                                       textediting: myControllerPassword),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 25.0),
-                                        child: text(
-                                            title: "Sort :",
-                                            fontsize: 17.0,
-                                            color: Colors.white),
-                                      ),
-                                      RadioButton(
-                                        description: "Agent",
-                                        value: "Agent",
-                                        textStyle:
-                                            TextStyle(color: Colors.white),
-                                        groupValue: _singleValue,
-                                        onChanged: (value) => setState(
-                                          () => _singleValue = value.toString(),
-                                        ),
-                                        activeColor: orange,
-                                      ),
-                                      RadioButton(
-                                        description: "User",
-                                        value: "User",
-                                        textStyle:
-                                            TextStyle(color: Colors.white),
-                                        groupValue: _singleValue,
-                                        onChanged: (value) => setState(
-                                          () => _singleValue = value.toString(),
-                                        ),
-                                        activeColor: orange,
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    //  color: Colors.amberAccent,
-                                    alignment: Alignment.topRight,
-                                    width: size.width * .8,
-                                    child: RichText(
-                                      text: TextSpan(
-                                        text: 'Forgotten password?',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () {
-                                            HapticFeedback.lightImpact();
-                                            Fluttertoast.showToast(
-                                              msg:
-                                                  'Forgotten password! button pressed',
-                                            );
-                                          },
-                                      ),
-                                    ),
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     Padding(
+                                  //       padding:
+                                  //           const EdgeInsets.only(left: 25.0),
+                                  //       child: text(
+                                  //           title: "Sort :",
+                                  //           fontsize: 17.0,
+                                  //           color: Colors.white),
+                                  //     ),
+                                  //     RadioButton(
+                                  //       description: "Agent",
+                                  //       value: "Agent",
+                                  //       textStyle:
+                                  //           TextStyle(color: Colors.white),
+                                  //       groupValue: _singleValue,
+                                  //       onChanged: (value) => setState(
+                                  //         () => _singleValue = value.toString(),
+                                  //       ),
+                                  //       activeColor: blue,
+                                  //     ),
+                                  //     RadioButton(
+                                  //       description: "User",
+                                  //       value: "User",
+                                  //       textStyle:
+                                  //           TextStyle(color: Colors.white),
+                                  //       groupValue: _singleValue,
+                                  //       onChanged: (value) => setState(
+                                  //         () => _singleValue = value.toString(),
+                                  //       ),
+                                  //       activeColor: blue,
+                                  //     ),
+                                  //   ],
+                                  // ),
+                                
                                   //  SizedBox(height: size.width * .2),
                                   InkWell(
                                     splashColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () {
-                                      setState(() {
-                                        isloading = true;
-                                      });
-                                      if (validData() == true) {
-                                        signupApis(
-                                                name: myControllerName.text,
-                                                email: myControllerEmail.text,
-                                                conatact:
-                                                    myControllerContact.text,
-                                                address:
-                                                    myControllerAddress.text,
-                                                password:
-                                                    myControllerPassword.text,
-                                                type: _singleValue,
-                                                context: context)
-                                            .then((value) => {
-                                                  setState(() {
-                                                    isloading = false;
-                                                  }),
-                                                });
-                                      } else {
-                                        setState(() {
-                                          isloading = false;
-                                        });
-                                      }
+                                    Get.to(Navbar);
+                                      // setState(() {
+                                      //   isloading = true;
+                                      // });
+                                      // if (validData() == true) {
+                                      //   signupApis(
+                                      //           name: myControllerName.text,
+                                      //           email: myControllerEmail.text,
+                                      //           conatact:
+                                      //               myControllerContact.text,
+                                      //           address:
+                                      //               myControllerAddress.text,
+                                      //           password:
+                                      //               myControllerPassword.text,
+                                      //           type: _singleValue,
+                                      //           context: context)
+                                      //       .then((value) => {
+                                      //             setState(() {
+                                      //               isloading = false;
+                                      //             }),
+                                      //           });
+                                      // } else {
+                                      //   setState(() {
+                                      //     isloading = false;
+                                      //   });
+                                      // }
 
                                       // print("Email:"+myControllerEmail.text);
                                       // print(myControllerEmail.text);
@@ -286,7 +258,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                             width: size.width / 1.25,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
-                                              color: orange,
+                                              color: blue,
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                             ),
@@ -352,7 +324,7 @@ class _SignupScreenState extends State<SignupScreen> {
       alignment: Alignment.center,
       padding: EdgeInsets.only(right: size.width / 30),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(.1),
+        color: Colors.white.withOpacity(.5),
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextField(
@@ -370,14 +342,14 @@ class _SignupScreenState extends State<SignupScreen> {
           // errorText: validateEmail(textediting.text),
           prefixIcon: Icon(
             icon,
-            color: Colors.white.withOpacity(.8),
+            color: Colors.black.withOpacity(.8),
           ),
           border: InputBorder.none,
           hintMaxLines: 1,
           hintText: hintText,
           hintStyle: TextStyle(
             fontSize: 14,
-            color: Colors.white.withOpacity(.5),
+            color: Colors.black.withOpacity(.5),
           ),
         ),
       ),

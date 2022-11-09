@@ -3,9 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:dio/dio.dart';
-import 'package:rent_house/View/Admin/Navbar/adminNavbar.dart';
-import 'package:rent_house/View/Admin/View_Property/AdminDetail.dart';
-import 'package:rent_house/View/Admin/View_Property/Admin.dart';
 import 'package:rent_house/View/Navigation/navBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -65,7 +62,7 @@ Future<String> loginApis({email, password, context}) async {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => role1 == 'user' ? const Navbar() : const AdminNavbar()),
+            builder: (context) =>  const Navbar()),
       );
       Fluttertoast.showToast(
           msg: "Login Successfull", backgroundColor: Colors.cyan);

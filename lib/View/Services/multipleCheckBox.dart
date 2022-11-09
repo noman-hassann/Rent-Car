@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rent_house/Config/color.dart';
+
 import 'package:rent_house/widgets/widgets.dart';
+
+import '../../Config/color.dart';
 
 // Multi Select widget
 // This widget is reusable
@@ -65,7 +67,7 @@ class _MultiSelectState extends State<MultiSelect> {
         ),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
-      primary: orange, //background color
+      primary: blue, //background color
       onPrimary: Colors.black, //ripple color
    ),
           child: text(title: "Submit",color: Colors.white),
@@ -74,7 +76,7 @@ class _MultiSelectState extends State<MultiSelect> {
         ),
            ElevatedButton(
             style: ElevatedButton.styleFrom(
-      primary: orange, //background color
+      primary: blue, //background color
       onPrimary: Colors.black, //ripple color
    ),
           child: text(title: "Submit",color: Colors.white),

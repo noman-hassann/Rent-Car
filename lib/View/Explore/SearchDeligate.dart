@@ -3,10 +3,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:rent_house/View/Explore/ExploreView.dart';
 import 'package:rent_house/widgets/widgets.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../Home/homeView.dart';
 
 extension DuplicateRemoval<T> on List<T> {
   List<T> get removeDupluplicate => [
@@ -77,7 +78,7 @@ class MySearchDelegate extends SearchDelegate {
                             maxCrossAxisExtent: 400,
                           ),
                           itemBuilder: (BuildContext context, int index) {
-                            return (ExploreView(indexPass: _users![index]));
+                            return (RentailView(indexPass: _users![index]));
                           }),
                     ),
             ),

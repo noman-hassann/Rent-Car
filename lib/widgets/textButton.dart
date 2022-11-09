@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rent_house/config/color.dart';
+
+
 import 'package:rent_house/widgets/widgets.dart';
+
+import '../Config/color.dart';
 
 Container textButton({
   text1,
@@ -18,13 +21,13 @@ Container textButton({
                 title: text1,
                 fontsize: 15.0,
                 fontweight: FontWeight.normal,
-                color: textwhite),
+                color: white),
             widgetpass,
             text(
                 title: text2,
                 fontsize: 15.0,
                 fontweight: FontWeight.normal,
-                color: textwhite),
+                color: white),
           ],
         ),
       ],
@@ -36,7 +39,7 @@ Widget button({buttonTitle, size}) {
   return Container(
       height: size.height * 0.05,
       width: size.width * 0.4,
-      color: orange,
+      color: blue,
       child: Center(
         child: text(
             title: buttonTitle,
@@ -49,7 +52,7 @@ Widget button({buttonTitle, size}) {
 Widget button2({buttonTitle, height, width}) {
   return Container(
       decoration: BoxDecoration(
-          color: orange,
+          color: blue,
           border: Border.all(color: Colors.black.withOpacity(0.2)),
           borderRadius: BorderRadius.all(Radius.circular(5))),
       height: height,

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rent_house/View/Admin/Setting/adminSetting.dart';
-import 'package:rent_house/View/Setting/setting.dart';
-import 'package:rent_house/View/Terms&Contact/aboutus.dart';
-import 'package:rent_house/View/Terms&Contact/contact.dart';
-import 'package:rent_house/config/color.dart';
+import 'package:rent_house/Config/color.dart';
 import 'package:rent_house/splash.dart';
 import 'package:rent_house/widgets/textIconFunRow.dart';
 import 'package:rent_house/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Terms&Contact/terms.dart';
+
+import '../Terms&Contact/aboutUs.dart';
+import '../Terms&Contact/contactUs.dart';
+import '../Terms&Contact/terms&Conditions.dart';
 
 class DrawerData extends StatefulWidget {
   const DrawerData({Key? key}) : super(key: key);
@@ -46,7 +45,7 @@ class _DrawerDataState extends State<DrawerData> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
+    return Column(children: [
       Column(
         children: [
           DrawerHeader(
@@ -55,7 +54,10 @@ class _DrawerDataState extends State<DrawerData> {
               children: [
                 Row(
                   children: [
-                    const Image(image: AssetImage('assets/images/iconTop.png')),
+                    const Image(
+                      image: AssetImage('assets/images/logo.png'),
+                      height: 50,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 55, left: 3),
                       child: Column(
@@ -65,12 +67,12 @@ class _DrawerDataState extends State<DrawerData> {
                           text(
                               title: userName.toUpperCase(),
                               fontsize: 13.0,
-                              color: orange,
+                              color: black,
                               fontweight: FontWeight.bold),
                           text(
                               title: userAddress.toUpperCase(),
                               fontsize: 11.0,
-                              color: orange,
+                              color: black,
                               fontweight: FontWeight.bold),
                         ],
                       ),
@@ -99,19 +101,18 @@ class _DrawerDataState extends State<DrawerData> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    
                       const SizedBox(
                         height: 30,
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(const AboutUs());
+                          Get.to(AboutUs());
                         },
                         child: IconTextFun(
                             title: "About Us",
                             icon: Icons.info_outline_rounded,
-                            fontColor: textblack,
-                            iconColor: orange),
+                            fontColor: black,
+                            iconColor: blue),
                       ),
                       const SizedBox(
                         height: 30,
@@ -123,8 +124,8 @@ class _DrawerDataState extends State<DrawerData> {
                         child: IconTextFun(
                             title: "Contact Us",
                             icon: Icons.chat_bubble_outline_rounded,
-                            fontColor: textblack,
-                            iconColor: orange),
+                            fontColor: black,
+                            iconColor: blue),
                       ),
                       const SizedBox(
                         height: 30,
@@ -136,32 +137,28 @@ class _DrawerDataState extends State<DrawerData> {
                         child: IconTextFun(
                             title: "Terms & Conditions",
                             icon: Icons.person,
-                            fontColor: textblack,
-                            iconColor: orange),
+                            fontColor: black,
+                            iconColor: blue),
+                      ),
+
+                      SizedBox(height: 40,),
+                      InkWell(
+                        onTap: () async {
+                          SharedPreferences preferences =
+                              await SharedPreferences.getInstance();
+                          await preferences.clear();
+                          Get.to(SplashView());
+                        },
+                        child: IconTextFun(
+                            title: "Log Out",
+                            icon: Icons.logout_outlined,
+                            fontColor: black,
+                            iconColor: blue),
                       ),
                     ],
                   )),
             ],
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.6,
-            width: MediaQuery.of(context).size.width * 0.5,
-            child: Column(children: [
-              InkWell(
-                onTap: () async {
-                  SharedPreferences preferences =
-                      await SharedPreferences.getInstance();
-                  await preferences.clear();
-                  Get.to(SplashView());
-                },
-                child: IconTextFun(
-                    title: "Log Out",
-                    icon: Icons.logout_outlined,
-                    fontColor: textblack,
-                    iconColor: orange),
-              ),
-            ]),
-          )
         ],
       ),
     ]);

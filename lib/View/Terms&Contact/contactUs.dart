@@ -5,22 +5,22 @@ import 'package:rent_house/Config/color.dart';
 import 'package:rent_house/View/Navigation/navBar.dart';
 import 'package:rent_house/widgets/widgets.dart';
 
-class AboutUs extends StatefulWidget {
-   AboutUs({super.key});
+class ContactUs extends StatefulWidget {
+  const ContactUs({super.key});
 
   @override
-  State<AboutUs> createState() => _AboutUsState();
+  State<ContactUs> createState() => _ContactUsState();
 }
 
-class _AboutUsState extends State<AboutUs> {
+class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.only(top:8.0),
-          child: Column(children: [
+      child: Padding(
+        padding: const EdgeInsets.only(top:8.0),
+        child: Scaffold(
+          body: Column(children: [
             Container(
           width: size.width*0.95,
           child: Row(
@@ -51,7 +51,7 @@ class _AboutUsState extends State<AboutUs> {
                 ),
               ),
               text(
-                  title: "About Us",
+                  title: "Contact Us",
                   fontsize: 20.0,
                   fontweight: FontWeight.normal,
                   color: const Color.fromARGB(255, 15, 5, 5)),
@@ -94,23 +94,14 @@ class _AboutUsState extends State<AboutUs> {
                       height: 10,
                     ), //SizedBox
                     Text(
-                      'Rental Car is a division of Rental Motors Moesha Limited designed to simplify the renting of Cars in Pakistan.filter the results according to your needs all within the app. ',
+                      'Contact us:  RentalCar  \nEmail Us: rentalcar@gmail.com \nPhone: +921234456678\nTweeter: @rentalCar ',
                       style: TextStyle(
                         letterSpacing: 0.2,
                         fontSize: 15,
                         color: Colors.black,
                         // overflow:TextOverflow.visible
                       ), //Textstyle
-                    ), 
-                      Text(
-                      'Rental Car does not own any of the properties listed and we are responsible for any drivers you taken from us We do encourage you to report any suspicious activities to us so we can take the necessary bugs in the app.Go ahead and get new car for rent. Happy searching',
-                      style: TextStyle(
-                        letterSpacing: 0.2,
-                        fontSize: 15,
-                        color: Colors.black,
-                        // overflow:TextOverflow.visible
-                      ), //Textstyle
-                    ),//Text
+                    ), //Text
                     //SizedBox
                     //SizedBox
                   ],

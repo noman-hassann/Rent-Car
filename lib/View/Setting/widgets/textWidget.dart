@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:group_radio_button/group_radio_button.dart';
-import 'package:rent_house/config/color.dart';
+
+
 import 'package:rent_house/View/Setting/widgets/pop.dart';
 import 'package:rent_house/widgets/widgets.dart';
+
+import '../../../Config/color.dart';
 
 class textWidget extends StatefulWidget {
   final text1;
@@ -59,7 +62,7 @@ class _textWidgetState extends State<textWidget> {
                               title: widget.text2,
                               fontsize: 14.0,
                               fontweight: FontWeight.normal,
-                              color: textwhite),
+                              color: white),
                         ],
                       ),
                       // Padding(
@@ -116,7 +119,7 @@ class _textWidgetState extends State<textWidget> {
                       //         },
                       //         child: const Icon(
                       //           Icons.arrow_forward_ios_outlined,
-                      //           color: textwhite,
+                      //           color: white,
                       //           size: 25,
                       //         ),
                       //       ),
@@ -175,7 +178,7 @@ class _textWidgetState extends State<textWidget> {
 //                               title: text2,
 //                               fontsize: 14.0,
 //                               fontweight: FontWeight.normal,
-//                               color: textwhite),
+//                               color: white),
 //                         ],
 //                       ),
 //                       Padding(
@@ -192,7 +195,7 @@ class _textWidgetState extends State<textWidget> {
 //                               },
 //                               child: const Icon(
 //                                 Icons.arrow_forward_ios_outlined,
-//                                 color: textwhite,
+//                                 color: white,
 //                                 size: 25,
 //                               ),
 //                             ),

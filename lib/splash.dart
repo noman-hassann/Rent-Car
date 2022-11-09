@@ -3,11 +3,8 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rent_house/View/Admin/Navbar/adminNavbar.dart';
-import 'package:rent_house/View/Admin/View_Property/Admin.dart';
-import 'package:rent_house/View/GuestScreen/guestNavbar.dart';
 
-import 'package:rent_house/View/LoginSignUp/View/login.dart';
+import 'package:rent_house/View/LoginSignUp/login.dart';
 import 'package:rent_house/View/Navigation/navBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -67,19 +64,12 @@ class _SplashViewState extends State<SplashView> {
                 return LoginScreen();
               } else if (role == "user") {
                 return const Navbar();
-              } else if (role == "guest") {
-                return const GuestNavbar();
-              } else {
-                return const AdminNavbar();
               }
+              return Container();
             }
-                    //  role == null ? LoginScreen() : const Navbar()
-                    // : role == 'user'
-                    //     ? Navbar()
-                    //     : AdminView()
+                 
 
                     )));
-    // print("role ${role}");
   }
 
   @override
@@ -87,7 +77,7 @@ class _SplashViewState extends State<SplashView> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Image.asset('assets/logo.jpeg'),
+        child: Image.asset('assets/images/logo.png'),
       ),
     );
   }

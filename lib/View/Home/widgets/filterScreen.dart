@@ -3,16 +3,19 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
+
 import 'package:rent_house/Conrtoller/AdminApis/adminApis.dart';
 import 'package:rent_house/View/Drawer/drawerData.dart';
 import 'package:rent_house/View/Explore/SearchDeligate.dart';
 import 'package:rent_house/View/Home/homeView.dart';
 import 'package:rent_house/View/Home/widgets/PopUpOverLay.dart';
-import 'package:rent_house/config/color.dart';
+
 import 'package:rent_house/widgets/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
+
+import '../../../Config/color.dart';
 
 class FilterScreen extends StatefulWidget {
     final indexPass;
@@ -65,7 +68,7 @@ class _FilterScreenState extends State<FilterScreen> {
                       icon: const Icon(
                         Icons.arrow_back,
                         size: 25,
-                        color: orange,
+                        color: blue,
                       ),
                       onPressed: () {
                         Get.back();
@@ -81,8 +84,6 @@ class _FilterScreenState extends State<FilterScreen> {
                 const Image(image: AssetImage('assets/images/iconTop.png')),
               ],
             ),
-            SizedBox(height: size.height * 0.025),
-            SizedBox(height: size.height * 0.020),
             Expanded(
               child: 
                    SingleChildScrollView(
@@ -101,7 +102,7 @@ class _FilterScreenState extends State<FilterScreen> {
                           ),
                           itemBuilder: (BuildContext context, int index) {
                           
-                            return (HomeRoomView(indexPass: widget.indexPass![index]));
+                            return (RentailView(indexPass: widget.indexPass![index]));
                           }),
                     ),
             ),

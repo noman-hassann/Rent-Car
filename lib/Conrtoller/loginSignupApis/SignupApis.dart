@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:dio/dio.dart';
-import 'package:rent_house/View/Admin/Navbar/adminNavbar.dart';
-import 'package:rent_house/View/Admin/View_Property/Admin.dart';
 import 'package:rent_house/View/Navigation/navBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,7 +42,7 @@ Future<String> signupApis({
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => role == 'agent' ? const AdminNavbar() : const Navbar()),
+          builder: (context) =>  const Navbar()),
     );
     return '';
   } catch (e) {

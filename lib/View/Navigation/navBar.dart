@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:rent_house/Config/color.dart';
+
 import 'package:rent_house/View/Explore/Explore.dart';
 import 'package:rent_house/View/Favourite/favourite.dart';
 import 'package:rent_house/View/Home/home.dart';
 import 'package:rent_house/View/Setting/setting.dart';
+
+import '../../Config/color.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({super.key});
@@ -49,14 +51,14 @@ class _NavbarState extends State<Navbar> {
                   const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
               child: GNav(
                 //rippleColor: Color.fromARGB(255, 209, 63, 63)!,
-                hoverColor: orange,
+                hoverColor: blue,
                 gap: 6,
                 activeColor: Colors.black,
                 iconSize: 20,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 duration: const Duration(milliseconds: 400),
-                tabBackgroundColor: orange,
+                tabBackgroundColor: blue,
                 color: Colors.black,
                 tabs: const [
                   GButton(
